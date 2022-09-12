@@ -13,12 +13,12 @@ We're going to create a content management system that
   * support [red links](https://en.wikipedia.org/wiki/Wikipedia:Red_link)
   * has actual search
   * is packaged for reuse
-  * can survive a [hug of death](https://www.urbandictionary.com/define.php?term=hug%20of%20death)_
+  * can survive a [hug of death](https://www.urbandictionary.com/define.php?term=hug%20of%20death)
   * will resist adding a database as long as we can
 
 And we're going to do it so that a new devloper can follow along with the decisions we make as we create it.
 
-## No SPA or JS Framework?
+### No SPA or JS Framework?
 At some point, this may make sense, but I'm a old school believer in the open web. For a web site serving static content, single page apps and JavaScript fraeworks are overkill.  We're going to avoid them in this project.
 
 ### No database?
