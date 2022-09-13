@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+kebab () {
+  echo $(echo "$1" | sed -r -e 's/\s+/-/g' -e 's/([a-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
+}
+
+# create site dir if non-existent
+mkdir -p _site
+
+# prompt for title
+echo What should we call this post?
+read title
+
+date=$(date '+%Y-%m-%d')
+file_name="_site/$date-$(kebab "$title").post"
+
+if [ ! -f "$file_name" ]; then
+  # write new file
+  python bin/new_post.py "$file_name" "$title"
+else
+  echo "file $file_name already exists"
+fi

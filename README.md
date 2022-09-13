@@ -2,6 +2,7 @@
 
 ### What is this?  
 This is a recursive project.  We will generate a website which will host the description of the creation of itself.
+We're building a static site generator and publishing tool.
 
 ### Why not use one of a million apps that can already do this? 
 Because we can.
@@ -33,3 +34,9 @@ Heres' what we're going to use
 * Flask: for serving our content, and exposing some admin capabilities
 * git: for storing and serving files themselves
 * Solr: for implementing actual search of our content
+
+
+# Let's Get Started... Step One
+* create virtual environment
+* create folder structure /tests /posts /drafts
+
