@@ -1,22 +1,17 @@
 import sys
-from common.post import Post
+import yaml
+from common.models import Post
 
 
 if(__name__ == '__main__'):
-    post = Post(title=sys.argv[2], file_name=sys.argv[1])
-    template = f"""id: {post.id} 
-title: {post.title}
-date: {post.date}
-published: {post.published}
-lines: []
-tags: []
-summary_text:
-summary_image:
-file_name: {post.file_name}
-content:
-"""
-    with open(post.file_name, "w") as file:
-        file.write(template)
+    filepath = sys.argv[1]
+    contentpath = sys.argv[2]
+    title = sys.argv[3]
+
+    post = Post(title=title, content=contentpath)
+
+    stream = open(filepath, "w")
+    yaml.dump(post.__dict__, stream)
 
 
-
+                

@@ -5,18 +5,25 @@ kebab () {
 }
 
 # create site dir if non-existent
-mkdir -p _site
+mkdir -p site
 
 # prompt for title
 echo What should we call this post?
 read title
 
+kebab=$(kebab "$title")
 date=$(date '+%Y-%m-%d')
-file_name="_site/$date-$(kebab "$title").post"
+post="site/$date-$kebab.yml"
+content="site/$date-$kebab.md"
 
-if [ ! -f "$file_name" ]; then
+if [ ! -f "$post" ]; then
   # write new file
-  python bin/new_post.py "$file_name" "$title"
+  python bin/new_post.py "$post" "$content" "$title"
 else
-  echo "file $file_name already exists"
+  echo "file $post already exists"
 fi
+
+if [ ! -f "$content" ]; then
+  touch "$content"
+fi
+
