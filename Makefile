@@ -8,3 +8,5 @@ gen-site:
 clean:
 	rm site/*.post
 
+black:
+	PYTHONPATH=cms black cms bin

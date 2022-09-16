@@ -13,17 +13,12 @@ read title
 
 kebab=$(kebab "$title")
 date=$(date '+%Y-%m-%d')
-post="site/$date-$kebab.yml"
-content="site/$date-$kebab.md"
+file="site/$date-$kebab.yml"
 
-if [ ! -f "$post" ]; then
+if [ ! -f "$file" ]; then
   # write new file
-  python bin/new_post.py "$post" "$content" "$title"
+  python bin/new_post.py "$file" "$title"
 else
-  echo "file $post already exists"
-fi
-
-if [ ! -f "$content" ]; then
-  touch "$content"
+  echo "file $file already exists"
 fi
 

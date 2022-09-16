@@ -1,17 +1,12 @@
 import sys
-import yaml
-from common.models import Post
+import frontmatter
+from common.models import MarkdownPost
 
 
-if(__name__ == '__main__'):
+if __name__ == "__main__":
     filepath = sys.argv[1]
-    contentpath = sys.argv[2]
-    title = sys.argv[3]
+    title = sys.argv[2]
 
-    post = Post(title=title, content=contentpath)
-
-    stream = open(filepath, "w")
-    yaml.dump(post.__dict__, stream)
-
-
-                
+    post = MarkdownPost(title=title, content=None)
+    with open(filepath, "w") as file:
+        file.write(frontmatter.dumps(post))
