@@ -1,8 +1,8 @@
 import os
+import sys
 import frontmatter
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from jinja2_markdown import MarkdownExtension
-from common.models import MarkdownPost
 
 
 def load_post(filepath):
@@ -21,7 +21,7 @@ def get_posts(rootdir):
     return posts
 
 
-def render_site():
+def render_site(rootdir):
     env = Environment(
         loader=FileSystemLoader("cms/templates"),
         autoescape=select_autoescape(),
@@ -34,10 +34,13 @@ def render_site():
 
     # convert posts to html
     for post in posts:
-        print(template.render(post.__dict__))
+        with open(f"{rootdir}/{post['date']}-{post['kebab']}.html", "w") as file:
+            rendered = template.render(content=post.content, devmode="true", **post)
+            file.write(rendered)
 
     # build home page
 
 
 if __name__ == "__main__":
-    render_site()
+    rootdir = sys.argv[1]
+    render_site(rootdir)

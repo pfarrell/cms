@@ -1,12 +1,12 @@
 
 post:
-	PYTHONPATH=cms bin/new_post
+	@PYTHONPATH=cms bin/new_post
 
 gen-site:
-	PYTHONPATH=cms python bin/gen_site.py
+	@PYTHONPATH=cms bin/gen_site
 
 clean:
-	rm site/*.post
+	rm build/*
 
 black:
 	PYTHONPATH=cms black cms bin

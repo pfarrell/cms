@@ -3,16 +3,15 @@
 {% block head %}
     {{ super() }}
     <style type="text/css">
-        .important { color: #336699; }
     </style>
 {% endblock %}
 {% block content %}
     <h1>{{ title }}</h1>
-    <p class="important">
+    <div class="important">
     {% markdown %}
       {{ content|safe }}
     {% endmarkdown %}
-    </p>
+    </div>
 {% endblock %}
 
 

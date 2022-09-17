@@ -3,14 +3,27 @@
 <head>
     {% block head %}
     <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+          width: 50%;
+          min-width: 420px;
+        }
+        li {
+          margin-bottom: 1em;
+        }
+        p {
+          margin-bottom: 1.5em;
+        }
+    </style>
     {% endblock %}
 </head>
 <body>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
         {% block footer %}
-        &copy; Copyright 2008 by <a href="http://domain.invalid/">you</a>.
+        &copy; Copyright 2022 by <a href="http://patf.net/">Some dude</a>.
         {% endblock %}
     </div>
 </body>

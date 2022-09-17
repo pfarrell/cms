@@ -17,7 +17,7 @@ file="site/$date-$kebab.yml"
 
 if [ ! -f "$file" ]; then
   # write new file
-  python bin/new_post.py "$file" "$title"
+  python bin/new_post.py "$file" "$kebab" "$title"
 else
   echo "file $file already exists"
 fi

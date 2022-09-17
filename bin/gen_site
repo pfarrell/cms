@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -p build
+
+python bin/gen_site.py build
