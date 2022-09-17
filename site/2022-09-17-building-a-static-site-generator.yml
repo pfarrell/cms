@@ -1,0 +1,36 @@
+---
+date: '2022-09-17'
+id: 1663438500
+kebab: building-a-static-site-generator
+published: false
+title: Building a Static Site Generator
+---
+I'm taking a mini-sabbatical.  No, I'm not in academia.  I'm a 20 year programmer who's acheived a lot of his goals and is now planning what comes next.
+
+I've got a backlog of ideas that I've wanted to explore and I'm using this time to dig in and share what I've learned.
+
+As a first step, I wanted to out a new website.  I've liked [jeckyll](https://jekyllrb.com/), but why not see if I could build my own thing?
+
+## Step one... What are we doing?
+
+The biggest impediment to personal projects is putting up boundaries.
+
+* Some problems are too big
+* Some problmes are already solved
+* Some problems aren't a problem at all
+
+I'm going to make some choices here about what I'm building and write them down, because, it's way too easy to go off on tangents when we're building.
+
+### The PLAN
+```
+1. Writing is hard enough.  This tool should stay out of the way when we're writing.  
+2. There will be no database backend.
+3. I should be able to write and see my results quickly.  Live updates would be nice, but a publish step is ok in the early days.
+4. Don't waste time mucking with styling while writing.  See 1.
+5. Don't forget some problems are solved.
+6. Editing is writing, so, it should be as easy as writing.
+```
+
+## Tech Decisions
+
+As someone who's been programming professionally in 2 different centuries (*just* barely), change is a constant.  In 200
