@@ -34,11 +34,18 @@ def render_site(rootdir):
 
     # convert posts to html
     for post in posts:
+        rendered = template.render(content=post.content, **post)
         with open(f"{rootdir}/{post['date']}-{post['kebab']}.html", "w") as file:
-            rendered = template.render(content=post.content, devmode="true", **post)
             file.write(rendered)
 
+    # sort posts
+    posts.sort(key=lambda x: x['date'], reverse=True)
+
     # build home page
+    template = env.get_template("index.html")
+    rendered = template.render(posts=posts)
+    with open(f"{rootdir}/index.html", "w") as file:
+        file.write(rendered)
 
 
 if __name__ == "__main__":

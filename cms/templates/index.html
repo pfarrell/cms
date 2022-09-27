@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Walrus Media{% endblock %}
+{% block content %}
+  <ul>
+  {% for post in posts %}
+    <li><a href="{{ post.date }}-{{ post.kebab}}.html">{{ post.title }}</a></li>
+  {% endfor %}
+  </ul>
+
+{% endblock %}
+
+
