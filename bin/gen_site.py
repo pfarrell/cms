@@ -39,7 +39,7 @@ def render_site(rootdir):
             file.write(rendered)
 
     # sort posts
-    posts.sort(key=lambda x: x['date'], reverse=True)
+    posts.sort(key=lambda x: x["date"], reverse=True)
 
     # build home page
     template = env.get_template("index.html")
