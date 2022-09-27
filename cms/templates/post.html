@@ -6,7 +6,10 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>{{ title }}</h1>
+    <div class="title">
+      <h2>{{ title }}</h2>
+      <hr />
+    </div>
     <div class="important">
     {% markdown %}
       {{ content|safe }}
