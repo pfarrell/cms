@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 kebab () {
-  echo $(echo "$1" | sed -r -e 's/\s+/-/g' -e 's/([a-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
+  echo $(echo "$1" | sed -r -e 's/\s+/-/g' -e 's/([a-z0-9])([A-Z])/\1-\2/g' -e "s/[']//g" | tr '[:upper:]' '[:lower:]')
 }
 
 # create site dir if non-existent

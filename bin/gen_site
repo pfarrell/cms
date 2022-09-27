@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-mkdir -p build
+mkdir -p dist
 
-python bin/gen_site.py build
+python bin/gen_site.py $1
