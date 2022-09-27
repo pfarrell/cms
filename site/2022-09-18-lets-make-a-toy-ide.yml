@@ -1,0 +1,311 @@
+---
+date: '2022-09-18'
+id: 1663523096
+kebab: lets-make-a-toy-ide
+published: false
+title: Let's Make a Toy IDE
+---
+There's so much power sitting in our web browsers.  Let's have some fun.
+
+Let's use canvas to build up a little JavaScript IDE from scratch.
+
+
+### Starting Up...
+Starting from a blank page called `index.html`, we'll create our canvas and draw something simple.
+
+
+<textarea id="code_1">
+  <!DOCTYPE HTML>
+  <html lang="en">
+  <head>
+    <meta charset=utf-8>
+    <style>
+            canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+            var canvas = document.querySelector('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = 420;
+            canvas.height = 250;
+            ctx.fillRect(0, 0, 100, 100);
+    </script>
+  </body>
+  </html>
+</textarea>
+![start screen with ping square](img/mt_sshot_1.png){class=center}
+
+Now that we know canvas is working and we can write to it.  Let's set up a small animation.
+<textarea id="code_2">
+             var ctx = canvas.getContext('2d');
+             canvas.width = 420;
+             canvas.height = 250;
+-            ctx.fillRect(0, 0, 100, 100);
++            var [dx, dy, xpos, ypos, objSize] = [1, 1, 0, 0, 10];
++
++            function draw() {
++              ctx.clearRect(0, 0, canvas.width, canvas.height);
++              if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;
++              if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;
++              xpos += dx;
++              ypos += dy;
++              ctx.fillRect(xpos, ypos, objSize, objSize);
++              window.requestAnimationFrame(draw);
++            }
++
++            draw();
+     </script>
+   </body>
+ </html>
+</textarea>
+![bouncing square in canvas](img/mt_sshot_2.gif){class=center}
+
+Ok... Now, let's take it to another level.  We're going to create an bare bones IDE right in our browser.
+First, we need to update our html to add a textarea and a button to compile our code.
+<textarea id="code_3">
+   </head>
+   <body>
+     <canvas id="canvas"></canvas>
++    <div>
++            <div>
++              <input type="button" onclick="updateDrawFunc(this)" value="&#9650;" title="Update Code"></input>
++            </div>
++            <div>
++              <textarea id="code" rows=14, cols=57>&lt;/textarea>
++            </div>
++          </div>
+     &lt;script&gt;
+           var canvas = document.querySelector('canvas');
+           var ctx = canvas.getContext('2d');
+</textarea>
+
+![html for an in browser IDE](img/mt_sshot_3.png){class=center}
+
+Then we'll change our script to add some functionality to make us able to change the draw function.
+
+### *Caveat Emptor!* 
+Using the `eval` function to change strings into executed code is [SUPER DANGEROUS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!).  
+
+This isn't something that should be taken lightly.  Because we're controlling the input and execution, it's ok in this case
+(and fun!), but this is one of those super powers that can easily be abused.
+
+First, let's make it so that the text area is pre-populated with the draw function's code.
+<textarea id="code_4">
+       canvas.width = 420;
+       canvas.height = 250;
+       var [dx, dy, xpos, ypos, objSize] = [1, 1, 0, 0, 10];
++      var code='ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n'+
++        'if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;\n' +
++        'if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;\n' +
++        'xpos+= dx;\n' +
++        'ypos+= dy;\n' +
++        'ctx.fillRect(xpos, ypos, objSize, objSize);';
++      document.getElementById("code").value = code;
+ 
+       function draw() {
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+</textarea>
+![html for an in browser IDE](img/mt_sshot_4.png){class=center}
+
+This new code uses the magic of `eval` and JavaScript's [first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) to take the code written in the text area and to replace the draw function with what we've typed.  
+
+<textarea id="code_5">
+              'ypos+= dy;\n' +
+              'ctx.fillRect(xpos, ypos, objSize, objSize);';
+            document.getElementById("code").value = code;
++            var drawFunc = draw;
++
++            function updateDrawFunc() {
++              var code = document.getElementById("code").value;
++              ctx.clearRect(0,0,canvas.width,canvas.height);
++              eval("function f() {" + code + "; window.requestAnimationFrame(drawFunc);}");
++              drawFunc=f;
++            }
+
+            function draw() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;
+              if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;
+              xpos+= dx;
+              ypos+= dy;
+              ctx.fillRect(xpos, ypos, objSize, objSize);
+-             window.requestAnimationFrame(draw);
++             window.requestAnimationFrame(drawFunc);
+            }
+
+-            draw();
++            drawFunc();
+     &lt;/script&gt;
+   </body>
+ </html>
+</textarea>
+
+
+Check out the image below.  In it, we change `objSize`, click the &#9650; button, and see the square change size. 
+![changing the draw function on the fly](img/mt_sshot_5_3.gif){class=center} 
+
+As we can see by the documentation at MDN, this use of eval isn't very safe.  Before we get too far along, let's change it to use the `Function` capability as recommended.
+<textarea id="code_6">
+  function updateDrawFunc() {
+         var code = document.getElementById("code").value;
+         ctx.clearRect(0,0,canvas.width,canvas.height);
+-        eval("function f() {" + code + "; window.requestAnimationFrame(drawFunc);}");
+-        drawFunc=f;
++        drawFunc=Function(code + "; window.requestAnimationFrame(drawFunc);");
+       }
+
+       function draw() {
+</textarea>
+
+Now, let's add a screen clear function.  We're going to make some tweaks to make our IDE able to run more arbitrary code. First, we'll add a button
+to clear the screen
+<textarea id="code_7">
+         <div>
+           <div>
+             <input type="button" id="updateDraw" onclick="updateDrawFunc(this)" value="&#9650;" title="Update Code"></input>
++            <input type="button" id="clearScreen" onclick="clearScreen(this)" title="Clear" value="&#9114;"></input>
+           </div>
+           <div>
+             &lt;textarea id="code" rows=14, cols=57&gt;&lt;/textarea&gt;
+           </div>
+        </div>
+        &lt;script&gt;
+          var canvas = document.querySelector('canvas');
+          var ctx = canvas.getContext('2d');
+          canvas.width = 420;
+          canvas.height = 250;
+          var [dx, dy, xpos, ypos, objSize] = [1, 1, 0, 0, 10];
+          var code='ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n'+
+            'if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;\n' +
+            'if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;\n' +
+            'xpos+= dx;\n' +
+            'ypos+= dy;\n' +
+            'ctx.fillRect(xpos, ypos, objSize, objSize);';
+          document.getElementById("code").value = code;
+          var drawFunc = draw;
+ 
++         function clearScreen() {
++           ctx.clearRect(0, 0, canvas.width, canvas.height);
++         }
++
+          function updateDrawFunc() {
+            var code = document.getElementById("code").value;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+</textarea>
+![bouncing square in canvas with a clear function working](img/mt_sshot_7.gif){class=center}
+
+Next, let's make it so we can pause animations and a step forward function.  Step backwards will require some more thought.
+In order to update the display value of our buttons using html entities, we need to switch from using `<input>` to `<button>`.
+<textarea id="code_8">
+     <canvas id="canvas"></canvas>
+     <div>
+       <div>
+-        <input type="button" id="updateDraw" onclick="updateDrawFunc(this)" value="&#9650;" title="Update Code"></input>
+-        <input type="button" id="clearScreen" onclick="clearScreen(this)" title="Clear" value="&#9114;"></input>
++        <button id="animate" onclick="updateAnimating(this)"  title="Pause">&#9208;</button>
++        <button id="stepForward" onclick="step(this)"  title="Step Forward">&#62;</button>
++        <button id="updateDraw" onclick="updateDrawFunc(this)"  title="UpdateCode">&#9650;</button>
++        <button id="clearScreen" onclick="clearScreen(this)" title="Clear">&#9114;</button>
+       </div>
+       <div>
+         &lt;textarea id="code" rows=14, cols=57&gt;&lt;/textarea&gt;
+       </div>
+     </div>
+     &lt;script&gt;
++      var active = true;
+       var canvas = document.querySelector('canvas');
+       var ctx = canvas.getContext('2d');
+       canvas.width = 420;
+
+====
+
+       document.getElementById("code").value = code;
+       var drawFunc = draw;
+
++      function updateAnimating(elem) {
++        if(active) {
++          elem.innerHTML= '&#9654;';
++          elem.title = "Start";
++          active = false;
++        } else {
++          active = true;
++          elem.innerHTML= '&#9208;';
++          elem.title = "Pause";
++          window.requestAnimationFrame(drawFunc);
++        }
++      }
++
+       function clearScreen() {
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+       }
+
++      function step() {
++        // Only allow step if animations are paused
++        if(!active) {
++          drawFunc();
++        }
++      }
++
+       function updateDrawFunc() {
+         var code = document.getElementById("code").value;
+         ctx.clearRect(0,0,canvas.width,canvas.height);
+-        drawFunc=Function(code + "; window.requestAnimationFrame(drawFunc);");
++        drawFunc=Function(code + "; if(active) { window.requestAnimationFrame(drawFunc); }");
+       }
+
+       function draw() {
+
+====
+
+         xpos+= dx;
+         ypos+= dy;
+         ctx.fillRect(xpos, ypos, objSize, objSize);
+-        window.requestAnimationFrame(drawFunc);
++        if(active) {  window.requestAnimationFrame(drawFunc); }
+       }
+
+       drawFunc();
+
+</textarea>
+![bouncing square in canvas with a pause and step function working](img/mt_sshot_8.gif){class=center}
+
+Our code is still dependent on some global variables that track it's state.  Let's fix that so we can make our ide more flexible.
+
+
+<link rel="stylesheet" href="css/codemirror.min.css">
+<script src="js/codemirror.min.js"></script
+<script src="js/mode/css/css.min.js"></script>
+<script src="js/mode/diff/diff.min.js"></script>
+<script src="js/mode/xml/xml.min.js"></script>
+<script src="js/mode/javascript/javascript.min.js"></script>
+<script src="js/mode/htmlmixed/htmlmixed.min.js"></script>
+<script>
+var cm_1=CodeMirror.fromTextArea(
+  document.getElementById('code_1'), {
+    lineNumbers: true,
+    tabSize: 2,
+    smartIndent: true,
+    readOnly: true,     
+    mode: {
+      name: "htmlmixed",
+    }
+  });
+
+var diffs = [13, 8, 22, 29, 34, 11, 10];  
+for(const idx of diffs.keys()) {
+  let lineNum = diffs[idx];
+  let cmInstance = idx + 2;
+  CodeMirror.fromTextArea(
+    document.getElementById('code_' + cmInstance), {
+      lineNumbers: true,
+      firstLineNumber: lineNum,
+      readOnly: true,
+      mode: {
+        name: "diff"
+      },
+  });
+}
+</script>
+
