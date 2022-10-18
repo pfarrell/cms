@@ -47,7 +47,8 @@
         ]
       },
       { "Blank": {"class": "spacer"}},
-      { "Blank": {"id": "highlight", "class": "spacer", "colspan": 10, "rowspan": 3}},
+      { "Highlight": {"id": "highlight", "class": "spacer", "colspan": 10, "rowspan": 3}
+      },
       { "Blank": {"class": "spacer", "colspan": 5}},
       {
         "Cell": [
@@ -68,7 +69,7 @@
           "0.0001785",
           "Noble gas",
           "1868",
-           ""
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Helium_discharge_tube.jpg/220px-Helium_discharge_tube.jpg"
         ]
       },
       { "Row": {}},
@@ -91,7 +92,7 @@
           "0.534",
           "Alkali metal",
           "1817",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Lithium_paraffin.jpg/220px-Lithium_paraffin.jpg"
         ]
       },
       {
@@ -113,7 +114,7 @@
           "1.85",
           "Alkaline earth metal",
           "1798",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Be-140g.jpg/140px-Be-140g.jpg"
         ]
       },
       {
@@ -135,7 +136,7 @@
           "2.37",
           "Metalloid",
           "1808",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Boron_R105.jpg/220px-Boron_R105.jpg"
         ]
       },
       {
@@ -157,7 +158,7 @@
           "2.2670",
           "Nonmetal",
           "Ancient",
-          ""
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Graphite-and-diamond-with-scale.jpg/220px-Graphite-and-diamond-with-scale.jpg"
         ]
       },
       {
@@ -179,7 +180,7 @@
           "0.0012506",
           "Nonmetal",
           "1772",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Liquidnitrogen.jpg/220px-Liquidnitrogen.jpg"
         ]
       },
       {
@@ -201,7 +202,7 @@
           "0.001429",
           "Nonmetal",
           "1774",
-           ""
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Liquid_oxygen_in_a_beaker_4.jpg/150px-Liquid_oxygen_in_a_beaker_4.jpg"
         ]
       },
       {
@@ -223,7 +224,7 @@
           "0.001696",
           "Halogen",
           "1670",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Liquid_fluorine_tighter_crop.jpg/220px-Liquid_fluorine_tighter_crop.jpg"
         ]
       },
       {
@@ -245,7 +246,7 @@
           "0.0008999",
           "Noble gas",
           "1898",
-           ""
+           "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/NeTube.jpg/220px-NeTube.jpg"
         ]
       },
       { "Row": {}},
