@@ -42,10 +42,10 @@ for idx, elem in enumerate(reparse):
         output += ">"
     elif("Cell" in elem.keys()):
         e = elem['Cell']
-        output += f"<td id=\"element_{e.get('number', '')}\" class=\"wrapper {e.get('group', '').replace(' ', '').lower()} \" title=\"{e.get('name')}\" onmouseover='highlight(this)' "
+        output += f"<td class=\"wrapper {e.get('group', '').replace(' ', '').lower()} \" title=\"{e.get('name')}\" onmouseover='highlight(this)' "
         for key in e.keys():
             output += f"data-{key.lower()}='{e[key]}' "
-        output += f"><p class=\"element\"><p class=\"number\">{e.get('number')}</p><p class=\"symbol\">{e.get('symbol')}</p><p class=\"name\">{e.get('name')}</p><p class=\"display\">{e.get('mass')}</p></p></td>"
+        output += f"><div class='cell'><div id=\"element_{e.get('number', '')}\"><p class='element'><p class=\"number\">{e.get('number')}</p><p class=\"symbol\">{e.get('symbol')}</p><p class=\"name\">{e.get('name')}</p><p class=\"display\">{e.get('mass')}</p></p></div></td>"
     else:
         print(f"unexpected key: {e.keys()}")
 print(output + "</tr>")
