@@ -27,7 +27,38 @@ for idx, elem in enumerate(reparse):
         output += "<td "
         for key in elem["Highlight"].keys():
             output += f"{key.lower()}='{elem['Highlight'][key]}' "
-        output += "><div class='row'><div class='col'><div class='imgWrapper'><img id='elementImage'>&nbsp;</div></div><div class='col'><div id='eSymbol'>&nbsp;</div><div id='eName'>&nbsp;</div><div id='eNumber'>&nbsp;</div><div id='eDiscovered'>&nbsp;</div><div id='eGroup'>&nbsp;</div><div id='eConfig'>&nbsp;</div><div id='eColor'>&nbsp;</div><div id='eMass'>&nbsp;</div><div id='eElectronegativity'>&nbsp;</div><div id='eRadius'>&nbsp;</div><div id='eEnergy'>&nbsp;</div><div id='eAffinity'>&nbsp;</div><div id='eOxidation'>&nbsp;</div><div id='eStandard'>&nbsp;</div><div id='eMelting'>&nbsp;</div><div id='eBoiling'>&nbsp;</div></div><div class='col'><div id='eDensity'>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div></div></div>"
+        output += ("><div class='highlight'>"
+                      "<div class='row'>"
+                        "<div class='col1'>"
+                          "<div class='imgWrapper'><img id='elementImage'>&nbsp;</div>"
+                        "</div>"
+                        "<div class='col2'>"
+                          "<div><div id='eName' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Atomic #</div><div id='eNumber' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Discovered</div><div id='eDiscovered' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Group</div><div id='eGroup' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Config</div><div id='eConfig' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Color</div><div id='eColor' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Mass</div><div id='eMass' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>ElectroNegativity</div><div id='eElectronegativity' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Radius</div><div id='eRadius' class='value'>&nbsp;</div></div>"
+                        "</div>"
+                        "<div class='col2'>"
+                          "<div class='vspacer'>&nbsp;</div>"
+                          "<div><div class='label'>Energy</div><div id='eEnergy' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Affinity</div><div id='eAffinity' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Oxidation</div><div id='eOxidation' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Standard State</div><div id='eStandard' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Melting</div><div id='eMelting' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Boiling</div><div id='eBoiling' class='value'>&nbsp;</div></div>"
+                          "<div><div class='label'>Density: </div><div id='eDensity' class='value'>&nbsp;</div></div>"
+                        "</div>"
+                        "<div class='col3'>"
+                          "<div><div id='eSymbol' class='value'>&nbsp;</div></div>"
+                        "</div>"
+                      "</div>"
+                      "<div class='wbg'></div>"
+                    "</div>")
     elif("Table" in elem.keys()):
         output += f"</table><table "
         for key in elem["Table"].keys():
@@ -42,10 +73,10 @@ for idx, elem in enumerate(reparse):
         output += ">"
     elif("Cell" in elem.keys()):
         e = elem['Cell']
-        output += f"<td class=\"wrapper {e.get('group', '').replace(' ', '').lower()} \" title=\"{e.get('name')}\" onmouseover='highlight(this)' "
+        output += f"<td class=\"wrapper {e.get('group', '').replace(' ', '').lower()} \" title=\"{e.get('name')}\" onmouseleave='unhighlight(this)' onmouseover='highlight(this)' "
         for key in e.keys():
             output += f"data-{key.lower()}='{e[key]}' "
-        output += f"><div class='cell'><div id=\"element_{e.get('number', '')}\"><p class='element'><p class=\"number\">{e.get('number')}</p><p class=\"symbol\">{e.get('symbol')}</p><p class=\"name\">{e.get('name')}</p><p class=\"display\">{e.get('mass')}</p></p></div></td>"
+        output += f"><div class='cell'><div id=\"element_{e.get('number', '')}\"><p class='element'><div class='circle'><p class=\"number\">{e.get('number')}</p></div><p class=\"symbol\">{e.get('symbol')}</p><p class=\"name\">{e.get('name')}</p><p class=\"display\">{e.get('mass')}</p></p></div></td>"
     else:
         print(f"unexpected key: {e.keys()}")
 print(output + "</tr>")
