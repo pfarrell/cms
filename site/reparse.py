@@ -33,12 +33,10 @@ for idx, elem in enumerate(reparse):
                           "<div class='imgWrapper'><img id='elementImage'>&nbsp;</div>"
                         "</div>"
                         "<div class='col2'>"
-                          "<div><div id='eName' class='value'>&nbsp;</div></div>"
-                          "<div><div class='label'>Atomic #</div><div id='eNumber' class='value'>&nbsp;</div></div>"
+                          "<div><div id='eNumber' class='value'>&nbsp;</div> <div id='eName' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>Discovered</div><div id='eDiscovered' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>Group</div><div id='eGroup' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>Config</div><div id='eConfig' class='value'>&nbsp;</div></div>"
-                          "<div><div class='label'>Color</div><div id='eColor' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>Mass</div><div id='eMass' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>ElectroNegativity</div><div id='eElectronegativity' class='value'>&nbsp;</div></div>"
                           "<div><div class='label'>Radius</div><div id='eRadius' class='value'>&nbsp;</div></div>"
@@ -57,6 +55,7 @@ for idx, elem in enumerate(reparse):
                           "<div><div id='eSymbol' class='value'>&nbsp;</div></div>"
                         "</div>"
                       "</div>"
+                      "<div><div class='value' id='eSummary'>&nbsp;</div>"
                       "<div class='wbg'></div>"
                     "</div>")
     elif("Table" in elem.keys()):
