@@ -48,10 +48,10 @@
       #highlight { width: 100%; height: 220px; position: relative; z-index: -1; }
       #elementImage { display: block; }
       #eSummary { margin: .5em 1em .5em 1em; }
-      #eSymbol { display: inline; font-size: 2em; }
-      #eName { display: inline; font-size: 2em; text-decoration: underline; }
-      #eNumber { font-size: 2em; display: inline; }
-      #eMass{ font-size: 2em; display: inline; }
+      #eSymbol { display: none; font-size: 2em; font-weight: bold; margin-left: .25em; }
+      #eName { display: inline; font-size: 2em; margin-left: .25em; }
+      #eNumber { font-size: 2em; margin-left: .25em; display: inline; }
+      #eMass{ font-size: 1.5em; margin-left: .25em; display: inline; }
 
       #element_1:before { content: "1"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
       #element_4:before { content: "2"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
@@ -102,6 +102,9 @@
             e.innerHTML = elem.dataset[prop];
           }
         }
+        document.getElementById("eNumber").innerText += ".";
+        document.getElementById("eSymbol").innerText += " -";
+        document.getElementById("eMass").innerText = "(" + document.getElementById("eMass").innerText + ")";
       }
 
       function highlight(elem) {
