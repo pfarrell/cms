@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
@@ -6,46 +5,21 @@
     <style>
       html, body{ margin: 0px; padding: 0px; border: 0px; font-family: sans-serif;}
       table { margin: auto; border-collapse: collapse; }
-      td {
-          min-width: 65px;
-          max-width: 65px;
-          padding: 0px;
-      }
-      .cell {
-          position: relative;
-      }
+      p { margin: .156em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; }
+      div.number { align: left;}
+      td { min-width: 65px; max-width: 65px; padding: 0px; }
+      input[type="range"] { width: 600px; }
 
-      .wrapper {
-          border: 1px solid black;
-      }
-
-      p {
-          margin: .156em;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          text-align: center;
-      }
-
+      .cell { position: relative; }
+      .wrapper { border: 1px solid black; }
       .element { overflow: hidden; text-overflow: ellipsis; }
       .symbol { font-size: 1.25em; }
       .number { font-size: .625em; }
       .display { padding-top: .3em; font-size: .5em; }
       .name { font-size: .5em; }
-      .continuation {
-          text-align: right;
-          font-size: .55em;
-      }
-      .spacer {
-          font-size: .625em;
-          min-width: 65px;
-          max-width: 65px;
-      }
-      .fblock {
-        margin-top: 15px;
-      }
-      div.number { align: left;}
-
+      .continuation { text-align: right; font-size: .55em; }
+      .spacer { font-size: .625em; min-width: 65px; max-width: 65px; }
+      .fblock { margin-top: 15px; }
       .nonmetal { background-color: #FAEDCB; }
       .noblegas { background-color: #F9C6C9}
       .actinide {background-color: #F2C6DE; }
@@ -56,388 +30,54 @@
       .metalloid {background-color: #C9E4DE; }
       .post-transitionmetal {background-color: #DBCDF0; }
       .transitionmetal {background-color: #C6DEF1; }
+      .wbg { height:16px; width: 100%; background-color: #FFF; position: absolute; bottom: 0px; }
+      .highlight { width: 100%; height: 100%; }
+      .imgWrapper img { margin: auto; max-height: 130px; max-width: 95%; }
+      .vspacer{ font-size: 2.5em; }
+      .col1 { float: left; width: 33%; }
+      .colh { float: left; width: 66%; padding-left: 5px; }
+      .col2 { float: left; width: 33%; }
+      .row: { height: 100%; margin: auto; position: relative; top:0px; }
+      .row:after { content: ""; display: table; clear: both; }
+      .vspace { background-color: #FFF; height: 1em; position: absolute; bottom: 0px; }
+      .label { font-size: 1.2em; display: none; margin-right: .5em; font-style: italic; color: blue; }
+      .value { font-size: 1.2em; display: none; }
+      .circle { border-radius: 50%; width: 23px; iline-height: 14px; background: #fff; border: 1px solid #666; text-align: center; padding:.5px; }
+      .disabled { background-color: gray; opacity: .2; border-style: dashed; }
 
-      #highlight {
-        width: 100%;
-        height: 220px;
-        position: relative;
-        z-index: -1;
-      }
+      #highlight { width: 100%; height: 220px; position: relative; z-index: -1; }
+      #elementImage { display: block; }
+      #eSummary { margin: .5em 1em .5em 1em; }
+      #eSymbol { display: inline; font-size: 2em; }
+      #eName { display: inline; font-size: 2em; text-decoration: underline; }
+      #eNumber { font-size: 2em; display: inline; }
+      #eMass{ font-size: 2em; display: inline; }
 
-      .wbg {
-        height:16px;
-        width: 100%;
-        background-color: #FFF;
-        position: absolute;
-        bottom: 0px;
-      }
-
-      .highlight {
-        width: 100%;
-        height: 100%;
-      }
-
-      #elementImage {
-        display: block;
-      }
-
-      .imgWrapper img {
-        margin: auto;
-        max-height: 130px;
-        max-width: 95%;
-      }
-
-      .col1 {
-        float: left;
-        width: 33%;
-      }
-
-      colh {
-        float: left;
-        width: 66%;
-        padding-left: 5px;
-      }
-
-      .col2 {
-        float: left;
-        width: 33%;
-       }
-
-
-      .row: {
-        height: 100%;
-        margin: auto;
-        position: relative;
-        top:0px;
-      }
-
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      #eSummary {
-        margin: .5em 1em .5em 1em;
-      }
-
-      #eSymbol {
-        display: inline;
-        font-size: 2em;
-        font-family: courier;
-      }
-
-      #eName {
-        display: inline;
-        font-size: 2em;
-        text-decoration: underline;
-      }
-
-      .vspacer{
-        font-size: 2.5em;
-      }
-
-      .vspace {
-        background-color: #FFF;
-        height: 1em;
-        position: absolute;
-        bottom: 0px;
-      }
-
-      .label {
-        font-size: 1.2em;
-        display: none;
-        margin-right: .5em;
-        font-style: italic;
-        color: blue;
-      }
-
-      .value {
-        font-size: 1.2em;
-        display: none;
-      }
-
-      .circle {
-        border-radius: 50%;
-        width: 23px;
-        iline-height: 14px;
-        background: #fff;
-        border: 1px solid #666;
-        text-align: center;
-        padding:.5px;
-      }
-
-      datalist {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        writing-mode: vertical-lr;
-        width: 200px;
-      }
-
-      option {
-        padding: 0;
-      }
-
-      input[type="range"] {
-        width: 600px;
-      }
-
-      #eNumber {
-        font-size: 2em;
-        display: inline;
-      }
-
-      #element_1:before {
-        content: "1";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_4:before {
-        content: "2";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_5:before {
-        content: "13";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_6:before {
-        content: "14";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_7:before {
-        content: "15";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_8:before {
-        content: "16";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_9:before {
-        content: "17";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_21:before {
-        content: "3";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_22:before {
-        content: "4";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_23:before {
-        content: "5";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_24:before {
-        content: "6";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_25:before {
-        content: "7";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_26:before {
-        content: "8";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_27:before {
-        content: "9";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_28:before {
-        content: "10";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_29:before {
-        content: "11";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_30:before {
-        content: "12";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #element_2:before {
-        content: "18";
-        font-size: .75em;
-        display: block;
-        top: -1.5em;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-
-      #element_1:after {
-        content: "1";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_3:after {
-        content: "2";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_11:after {
-        content: "3";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_19:after {
-        content: "4";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_37:after {
-        content: "5";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_55:after {
-        content: "6";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      #element_87:after {
-        content: "7";
-        font-size: .75em;
-        position: absolute;
-        top: 50%;
-        left: -1em;
-        transform: translate(0, -50%);
-      }
-
-      .disabled {
-        background-color: gray;
-        opacity: .2;
-        border-style: dashed;
-      }
-
+      #element_1:before { content: "1"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_4:before { content: "2"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_5:before { content: "13"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_6:before { content: "14"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_7:before { content: "15"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_8:before { content: "16"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_9:before { content: "17"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_21:before { content: "3"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_22:before { content: "4"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_23:before { content: "5"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_24:before { content: "6"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_25:before { content: "7"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_26:before { content: "8"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_27:before { content: "9"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_28:before { content: "10"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_29:before { content: "11"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_30:before { content: "12"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_2:before { content: "18"; font-size: .75em; display: block; top: -1.5em; position: absolute; width: 100%; text-align: center; }
+      #element_1:after { content: "1"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_3:after { content: "2"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_11:after { content: "3"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_19:after { content: "4"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_37:after { content: "5"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_55:after { content: "6"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
+      #element_87:after { content: "7"; font-size: .75em; position: absolute; top: 50%; left: -1em; transform: translate(0, -50%); }
     </style>
   </head>
   <body>
