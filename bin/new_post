@@ -13,11 +13,12 @@ read title
 
 kebab=$(kebab "$title")
 date=$(date '+%Y-%m-%d')
-file="site/$date-$kebab.yml"
+file="drafts/$date-$kebab.yml"
 
 if [ ! -f "$file" ]; then
   # write new file
   python bin/new_post.py "$file" "$kebab" "$title"
+  git add "$file"
 else
   echo "file $file already exists"
 fi
