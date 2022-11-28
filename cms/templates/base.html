@@ -11,11 +11,19 @@
     {% endblock %}
 </head>
 <body>
-    <div id="content" class="center">{% block content %}{% endblock %}</div>
-    <div id="footer">
-        {% block footer %}
-        &copy; Copyright 2022 by <a href="http://patf.net/">Some dude</a>.
-        {% endblock %}
+    <div class="nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="banner">
+        <h1>The Farrellel Postulate</h1>
+      </div>
+    {% block content %}{% endblock %}
+    <div id="footer" class="center">
+        &copy;2022 by <a href="http://patf.net/">CantankerousWalrus Software</a>.
     </div>
+    <div>
 </body>
 </html>

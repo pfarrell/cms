@@ -1,12 +1,23 @@
 {% extends "base.html" %}
-{% block title %}Walrus Media{% endblock %}
+{% block title %}Patf.net{% endblock %}
 {% block content %}
-  <ul>
+  <main class="grid">
   {% for post in posts %}
-    <li><a href="{{ post.date }}-{{ post.kebab}}.html">{{ post.title }}</a></li>
+  <article class="">
+    <img src="{{ post.image }}" />
+    <div class="text">
+      <h3>{{ post.title }}</h3>
+      <p>
+        {{ post.summary }}
+      </p>
+      {% if 'projectLink' in post %}
+      <p><a class="btn-default" href="{{ post.projectLink }}" target="_">See it In Action!</a><p>
+      {% endif %}
+      <a class="btn-default" href="{{ post.date }}-{{ post.kebab}}.html">Read More</a>
+    </div>
+  </article>
   {% endfor %}
-  </ul>
-
+  </main>
 {% endblock %}
 
 

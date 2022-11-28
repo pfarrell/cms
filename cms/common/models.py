@@ -7,7 +7,8 @@ from datetime import date
 class MarkdownPost(frontmatter.Post):
     def __init__(self, kebab, title, content, id=None, dt=None):
         super().__init__(
-            content=content, kebab=kebab, title=title, date=dt, published=False
+            content=content, kebab=kebab, title=title, 
+            date=dt, projectLink=None, summary="Write a summary", image="update me"
         )
 
         if self.get("id") is None:
