@@ -3,7 +3,9 @@ date: '2022-09-17'
 id: 1663438500
 kebab: building-a-static-site-generator
 published: false
-title: Building a Static Site Generator
+title: Building a Static Site Generator to Build This Site
+summary: Project notes from building a quick and dirty static site generator
+image: img/hypercube.gif
 ---
 I've liked [jeckyll](https://jekyllrb.com/), a static site generator written in Ruby, but why not see if I could build our own thing?
 

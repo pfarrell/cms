@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <style>
+    canvas { border: 1px solid black; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+<script>
+
+  function draw() {
+      time+=1
+      let hpos = time % canvas.width;
+     // ctx.beginPath();
+      ctx.arc(hpos, 200, 10, 0, 2*Math.PI, false);
+     // ctx.closePath();
+      ctx.fill();
+      window.requestAnimationFrame(draw);
+  }
+
+  var canvas = document.querySelector('canvas');
+  var ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth-20;
+  canvas.height = 400;
+  var time = -1;
+  draw();
+</script>
+</body>
+</html>                      
+

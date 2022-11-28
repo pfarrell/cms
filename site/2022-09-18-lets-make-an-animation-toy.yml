@@ -1,13 +1,17 @@
 ---
 date: '2022-09-18'
 id: 1663523096
-kebab: lets-make-a-toy-ide
+kebab: lets-make-an-animation-toy
 published: false
-title: Let's Make a Toy IDE
+title: Let's Make an Animation Toy
+summary: Limited demo of using Javascript to write an IDE in the browser
+image: img/mt_sshot_2.gif
+projectLink: toy_ide.html 
 ---
 There's so much power sitting in our web browsers.  Let's have some fun.
 
-Let's use canvas to build up a little JavaScript IDE from scratch.
+Let's use canvas to build up a little JavaScript animation toy from scratch.
+At the end, we'll have a web page with a canvas that's painted by a function we can code on the page itself.
 
 
 ### Starting Up...
@@ -85,12 +89,6 @@ First, we need to update our html to add a textarea and a button to compile our 
 
 Then we'll change our script to add some functionality to make us able to change the draw function.
 
-### *Caveat Emptor!* 
-Using the `eval` function to change strings into executed code is [SUPER DANGEROUS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!).  
-
-This isn't something that should be taken lightly.  Because we're controlling the input and execution, it's ok in this case
-(and fun!), but this is one of those super powers that can easily be abused.
-
 First, let's make it so that the text area is pre-populated with the draw function's code.
 <textarea id="code_4">
        canvas.width = 420;
@@ -109,7 +107,14 @@ First, let's make it so that the text area is pre-populated with the draw functi
 </textarea>
 ![html for an in browser IDE](img/mt_sshot_4.png){class=center}
 
-This new code uses the magic of `eval` and JavaScript's [first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) to take the code written in the text area and to replace the draw function with what we've typed.  
+Our next part is going to use some dark magic.  We're going to use `eval` to turn a string into executed code.  This isn't something that should be taken lightly.  Because we're controlling the input and execution, it's ok in this case
+(and fun!), but this is one of those super powers that can easily be abused.
+
+### *Caveat Emptor!*                                                                                          
+Using the `eval` function to change strings into executed code is [SUPER DANGEROUS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!).  
+
+This new code combines the magic of `eval` and JavaScript's [first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) to take the code written in the text area and to replace the draw function with what we've typed. We make it easier on ourselve to append the `window.requestAnimationFrame(drawFunc)`
+function in code instead of making us type it every time.
 
 <textarea id="code_5">
               'ypos+= dy;\n' +
@@ -146,7 +151,7 @@ This new code uses the magic of `eval` and JavaScript's [first-class functions](
 Check out the image below.  In it, we change `objSize`, click the &#9650; button, and see the square change size. 
 ![changing the draw function on the fly](img/mt_sshot_5_3.gif){class=center} 
 
-As we can see by the documentation at MDN, this use of eval isn't very safe.  Before we get too far along, let's change it to use the `Function` capability as recommended.
+As we can see by the documentation at MDN, this use of eval isn't very safe.  Before we get too far along, let's change it to use the `Function` capability as recommended. It's still dangerous, but not quite as much.
 <textarea id="code_6">
   function updateDrawFunc() {
          var code = document.getElementById("code").value;
@@ -159,8 +164,7 @@ As we can see by the documentation at MDN, this use of eval isn't very safe.  Be
        function draw() {
 </textarea>
 
-Now, let's add a screen clear function.  We're going to make some tweaks to make our IDE able to run more arbitrary code. First, we'll add a button
-to clear the screen
+We're going to make some tweaks to make our IDE able to run more arbitrary code. First, we'll add a button to clear the screen
 <textarea id="code_7">
          <div>
            <div>
@@ -271,7 +275,72 @@ In order to update the display value of our buttons using html entities, we need
 </textarea>
 ![bouncing square in canvas with a pause and step function working](img/mt_sshot_8.gif){class=center}
 
-Our code is still dependent on some global variables that track it's state.  Let's fix that so we can make our ide more flexible.
+Til now, our application has been dependent on some global variables that track its state.  That constrains out toy to the animation we've been demoing.
+Let's fix that so we can make our ide more flexible.  Our function needs a way to have a record of what the current state is.  One way we can approach this is to create a dummy global object at startup and allow our draw function to manage it.
+<textarea id="code_9">
+         <button id="clearScreen" onclick="clearScreen(this)" title="Clear">&#9114;</button>
+       </div>
+       <div>
+-        &lt;textarea id="code" rows=14, cols=57&gt;&lt;/textarea&gt;
++        &lt;textarea id="code" rows=17, cols=57&gt;&lt;/textarea&gt;
+       </div>
+     </div>
+     &lt;script&gt;
+
+====
+
+       var ctx = canvas.getContext('2d');
+       canvas.width = 420;
+       canvas.height = 250;
+-      var [dx, dy, xpos, ypos, objSize] = [1, 1, 0, 0, 10];
+-      var code='ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n'+
+-        'if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;\n' +
+-        'if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;\n' +
+-        'xpos+= dx;\n' +
+-        'ypos+= dy;\n' +
+-        'ctx.fillRect(xpos, ypos, objSize, objSize);';
++      var st = null;
++      var code = 'if(!st) {\n' +
++        '  st = new Object();\n' + 
++        '  [st.dy, st.dx, st.xpos, st.ypos, st.objSize] = [1, 1, 0, 0, 10];\n' +
++        '}\n\n' +
++        'ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n'+
++        'if(st.xpos + st.objSize > canvas.width || st.xpos < 0) st.dx*=-1;\n' +
++        'if(st.ypos + st.objSize > canvas.height || st.ypos < 0) st.dy*=-1;\n' +
++        'st.xpos+= st.dx;\n' +
++        'st.ypos+= st.dy;\n' +
++        'ctx.fillRect(st.xpos, st.ypos, st.objSize, st.objSize);';
+       document.getElementById("code").value = code;
+       var drawFunc = draw;
+ 
+====
+
+       }
+ 
+       function draw() {
++        if(!st) {
++          st = new Object();
++          [st.dy, st.dx, st.xpos, st.ypos, st.objSize] = [1, 1, 0, 0, 10];
++        }
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+-        if(xpos + objSize > canvas.width || xpos < 0) dx*=-1;
+-        if(ypos + objSize > canvas.height || ypos < 0) dy*=-1;
+-        xpos+= dx;
+-        ypos+= dy;
+-        ctx.fillRect(xpos, ypos, objSize, objSize);
++        if(st.xpos + st.objSize > canvas.width || st.xpos < 0) st.dx*=-1;
++        if(st.ypos + st.objSize > canvas.height || st.ypos < 0) st.dy*=-1;
++        st.xpos+= st.dx;
++        st.ypos+= st.dy;
++        ctx.fillRect(st.xpos, st.ypos, st.objSize, st.objSize);
+         if(active) {  window.requestAnimationFrame(drawFunc); }
+       }
+ 
+</textarea>
+![working with anonymous state object](img/mt_sshot_9.gif){class=center}
+
+
+Ok.  We're about wrapped up with this first section.  We'll build on this in a subsequent post to make this a live coding experience.  For now, though, let's test our toy to see if we can draw some arbitrary animation.
 
 
 <link rel="stylesheet" href="css/codemirror.min.css">
@@ -293,7 +362,7 @@ var cm_1=CodeMirror.fromTextArea(
     }
   });
 
-var diffs = [13, 8, 22, 29, 34, 11, 10];  
+var diffs = [13, 8, 22, 29, 34, 11, 10, 16];  
 for(const idx of diffs.keys()) {
   let lineNum = diffs[idx];
   let cmInstance = idx + 2;

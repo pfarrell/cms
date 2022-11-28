@@ -4,6 +4,61 @@ id: 1666972543
 kebab: adventures-in-debugging
 published: false
 title: Adventures in Debugging
+summary: Debugging is twice as hard as writing a program in the first place
+image: img/rubber_ducky.png
 ---
+###Item 1: The Airball
+I'm working at my first computer job. It's a great first job. I do tech support, programming, sales support, training, and anything else that comes up. It's 2000 and our main product is a OCR scanning solution for data entry shops that we resell and customize. The software is distributed and has a licensing system that allows for complex deployments. Think of having several workstations dedicated to running scanners all day long, some really powerful computer doing the OCR jobs, and then a bunch of data entry people sitting at other workstations checking the OCR output and you're thinking of the systems we sell. 
 
-None
+It's a great product, but, being distributed, things can go wrong. Finding and fixing the issues ends up teaching me a lot about computer systems in the real world, but today I'm faced with a huge problem. Nothing is working for a particular client.
+
+The system can scan and the correction stations are all working, but the system just won't process any documents. On the phone, we go through normal tech support stuff
+
+* the _any error message?_: Nope
+* the _is it on?_: yes
+* the _application restart_: Still not working
+* the trusty old _reboot_: 5 minutes later... Still not working
+
+Ok. The application uses a database for it's backend and we have a procedure to rebuild. Maybe it got corrupted. Walk the client over this procedure.. Nothing.
+
+Ok. Let's do a test scan and follow it though the system. System seems to work fine. Images are created, records show up in the system, computers can talk to each other. I'm stumped. 
+
+there's like 20 more things we do that all should fix this thing but nothing's working. Client is pissed off.
+
+Ok. Luckily the client is local and it's like a half hour drive to their site. I'm coming out.
+
+The customer is actually a place where they manufacture class rings, so there's real gold on the premesis and, of course, they have a lot of security. It takes a bit to get through, but now I'm finally meeting my contact. He's happy I've taken the time to come out, but will be happier if I can fix his issue.
+
+We walk over to the workstations. The front end for the processing application is sitting open on the desktop waiting for me. I look at it for a few seconds and shudder.
+
+I calmly sit down, move the mouse over to the "paused" button and click it. The processing engine immediately started working on it's backlog. The system had a simple play pause button at the top that I hadn't thought to ask about and that the client hadn't seen.
+
+So. Three hours of phone calls and travel all to click a mouse once to fix.
+
+
+###Item 2: The No-Look Pass
+
+Much more satisfying.
+
+Working at a company with multiple teams all trying to ship using microservices built in Java and run on Spring. Our code was doing fine and we were in staging, testing it out before release. Our code was a proxy to a risk analysis application and communicated via an API. All of a sudden, our code is no longer sending requests to the risk analysis API. After some digging and testing, we found it was sending our requests to the authentication server. Must be a networking issue. Even though there'd been a deployment, we hadn't had any code released. Networking team gets involved, says there's no way it was their problem. We checked our code. Nothing had changed. We're still pulling the same config entry to get the api endpoint. We tested the endpoint using what was in our config. It all worked. But the app was still broken. We were at a total loss for what could be happening. 
+
+I started explaining the issue to an out of the loop teammate when the solution came like a flash. We were storing the API endpoint in our config system with a name like "api_url". The config system was essentially a global dictionary on the server. It suddenly occurred to me that another team might be using that same key in their code. A quick grep of their repo and, sure enough, another team had just launched a new service and were overriding our key with theirs. The config system didn't detect this as an error and just overwrote the value.
+
+By taking the time to explain my problem, it allowed my brain the space to think more globally. Never underestimate the power of rubber ducking your problems.
+
+###Item 3: The Swish
+My most successful debug ever.
+
+The telephone rings. I'm working at a tiny shop and our Business Manager is on vacation. She's at a motel and her laptop won't charge even though it's plugged into the outlet.
+
+I think for a second and then ask, "Is there a light switch that controls whether that outlet has power?"
+
+Pause.
+
+"That was it."
+
+Hole... In... One
+
+
+
+
