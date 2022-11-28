@@ -16,3 +16,6 @@ black:
 
 deploy: build
 	@rsync -e 'ssh -p 10022' -avz dist/* pfarrell@patf.net:/var/www/cms/
+
+deploy-prod: build
+	@rsync -e 'ssh -p 7822' -avz dist/* patfnet@mi3-ss121.a2hosting.com:/home/patfnet/public_html/
