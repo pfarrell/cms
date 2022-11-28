@@ -2,4 +2,4 @@
 
 mkdir -p dist
 
-python bin/gen_site.py $1 dev
+python bin/gen_site.py $1 prod

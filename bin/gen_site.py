@@ -21,7 +21,7 @@ def get_posts(rootdir):
     return posts
 
 
-def render_site(rootdir):
+def render_site(rootdir, sources):
     env = Environment(
         loader=FileSystemLoader("cms/templates"),
         autoescape=select_autoescape(),
@@ -30,7 +30,9 @@ def render_site(rootdir):
     template = env.get_template("post.html")
 
     # discover posts
-    posts = get_posts("site")
+    posts = []
+    for source in sources:
+        posts.extend(get_posts(source))
 
     # convert posts to html
     for post in posts:
@@ -50,4 +52,9 @@ def render_site(rootdir):
 
 if __name__ == "__main__":
     rootdir = sys.argv[1]
-    render_site(rootdir)
+    mode = sys.argv[2]
+    if(mode == 'dev'):
+        render_site(rootdir, ['drafts', 'site'])
+    else:
+        render_site(rootdir, ['site'])
+
