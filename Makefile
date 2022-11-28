@@ -4,12 +4,12 @@ post:
 
 build: clean
 	@PYTHONPATH=cms bin/gen_site dist
-	@cp -R site/assets/* dist/
+	@cp -R assets/* dist/
 	@cp site/*.html dist/
 
 build-prod: clean
 	@PYTHONPATH=cms bin/gen_prod_site dist
-	@cp -R site/assets/* dist/
+	@cp -R assets/* dist/
 	@cp site/*.html dist/
 
 clean:
