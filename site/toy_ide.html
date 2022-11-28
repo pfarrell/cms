@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset=utf-8>
+    <style>
+      canvas { border: 1px solid #374343; }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div>
+      <div>
+        <button id="animate" onclick="updateAnimating(this)"  title="Pause">&#9208;</button>
+        <button id="stepForward" onclick="step(this)"  title="Step Forward">&#62;</button>
+        <button id="updateDraw" onclick="updateDrawFunc(this)"  title="UpdateCode">&#9650;</button>
+        <button id="clearScreen" onclick="clearScreen(this)" title="Clear">&#9114;</button>
+      </div>
+      <div>
+        <textarea id="code" rows=17, cols=57></textarea>
+      </div>
+    </div>
+    <script>
+      var active = true;
+      var canvas = document.querySelector('canvas');
+      var ctx = canvas.getContext('2d');
+      canvas.width = 420;
+      canvas.height = 250;
+      var st = null;
+      var code = 'if(!st) {\n' +
+        '  st = new Object();\n' + 
+        '  [dx, dy, xpos, ypos, objSize] = [1, 1, 0, 0, 10];\n' +
+        '}\n\n' +
+        'ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n'+
+        'if(st.xpos + st.objSize > canvas.width || st.xpos < 0) st.dx*=-1;\n' +
+        'if(st.ypos + st.objSize > canvas.height || st.ypos < 0) st.dy*=-1;\n' +
+        'st.xpos+= st.dx;\n' +
+        'st.ypos+= st.dy;\n' +
+        'ctx.fillRect(st.xpos, st.ypos, st.objSize, st.objSize);';
+      document.getElementById("code").value = code;
+      var drawFunc = draw;
+
+      function updateAnimating(elem) {
+        if(active) {
+          elem.innerHTML= '&#9654;';
+          elem.title = "Start";
+          active = false;
+        } else {
+          active = true;
+          elem.innerHTML= '&#9208;';
+          elem.title = "Pause";
+          window.requestAnimationFrame(drawFunc);
+        }
+      }
+
+      function clearScreen() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function step() {
+        // Only allow step if animations are paused
+        if(!active) {
+          drawFunc();
+        }
+      }
+
+
+      function updateDrawFunc() {
+        var code = document.getElementById("code").value;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        drawFunc=Function(code + "; if(active) { window.requestAnimationFrame(drawFunc); }");
+      }
+
+      function draw() {
+        if(!st) {
+          st = new Object();
+          [st.dy, st.dx, st.xpos, st.ypos, st.objSize] = [1, 1, 0, 0, 10];
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if(st.xpos + st.objSize > canvas.width || st.xpos < 0) st.dx*=-1;
+        if(st.ypos + st.objSize > canvas.height || st.ypos < 0) st.dy*=-1;
+        st.xpos+= st.dx;
+        st.ypos+= st.dy;
+        ctx.fillRect(st.xpos, st.ypos, st.objSize, st.objSize);
+        if(active) {  window.requestAnimationFrame(drawFunc); }
+      }
+
+      drawFunc();
+    </script>
+  </body>
+</html>
