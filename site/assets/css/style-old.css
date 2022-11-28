@@ -1,0 +1,141 @@
+:root {
+  --clr-primary-400: 263 55% 52%;
+  --clr-secondary-400: 217 19% 35%;
+  --clr-secondary-500: 219 29% 14%;
+  --clr-neutral-100: 0 0% 100%;
+  --clr-neutral-200: 210 46% 95%;
+  --clr-neutral-300: 0 0% 81%;
+
+  --ff-primary: "Barlow Semi Condensed", sans-serif;
+
+  --fw-400: 500;
+  --fw-700: 600;
+
+  --fs-300: 0.6875rem;
+  --fs-400: 0.8125rem;
+  --fs-500: 1.25rem;
+
+  --boder-color: color: #374343;
+}
+
+html {
+  background: rgb(76,91,92);
+  background: linear-gradient(90deg, rgba(76,91,92,.3) 0%, rgba(76,91,92,.5) 50%, rgba(76,91,92,.3) 100%);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+
+  font-family: Verdana, Arial, san-serif
+
+}
+
+#content {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  color: var(--border-color);
+  padding: 0em 1em 1em 1em;
+  width: 82ch;
+  border: 3px solid #374343
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+canvas { 
+  border: 2px solid #374343; 
+}
+
+
+.title {
+  font-size: 4vh;
+  text-align: center;
+}
+
+a {
+  color: #279995;
+}
+
+li {
+  margin-bottom: 0 1em 1em 1em;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+#footer {
+  margin: 1em;
+}
+
+.post-grid {
+  display: grid;
+  gap: 1.5 rem;
+  grid-auto-columns: 1fr;
+  padding-block: 2rem;
+  width: min(95%, 70rem);
+  margin-inline: auto;
+}
+
+.post-grid article {
+
+  font-size: var(--fs-400);
+  padding:1em;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.post-grid article p {
+  padding:1em;
+  text-align: left;
+}
+
+.post-grid article img {
+  height: 160px;  
+  margin: auto;
+}
+
+.post-grid:nth-child(1) {
+  grid-area: one;
+}
+.post-grid:nth-child(2) {
+  grid-area: two;
+}
+.post-grid:nth-child(3) {
+  grid-area: three;
+}
+.post-grid:nth-child(4) {
+  grid-area: four;
+}
+.post-grid:nth-child(5) {
+  grid-area: five;
+}
+
+
+@media screen and (min-width: 33em) {
+  .post-grid{
+      grid-template-areas:
+      "one"
+      "two"
+      "five"
+      "four";
+  }
+}
+
+@media screen and (min-width: 38em) {
+  .post-grid{
+    grid-template-areas:
+     'one one'
+     'two five'
+     'three five'
+     'four four';
+  }
+}
+
