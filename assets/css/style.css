@@ -10,7 +10,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on;
-
 }
 
 .container {
@@ -54,6 +53,23 @@ li {
 
 p {
   margin-bottom: 1.5em;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav li {
+  float: left;
+}
+
+.nav a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
 }
 
 #footer {

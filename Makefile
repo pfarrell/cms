@@ -6,11 +6,13 @@ build: clean
 	@PYTHONPATH=cms bin/gen_site dist
 	@cp -R assets/* dist/
 	@cp site/*.html dist/
+	@cp site/*.pdf dist/
 
 build-prod: clean
 	@PYTHONPATH=cms bin/gen_prod_site dist
 	@cp -R assets/* dist/
 	@cp site/*.html dist/
+	@cp site/*.pdf dist/
 
 clean:
 	@rm -rf dist/css dist/img dist/js
