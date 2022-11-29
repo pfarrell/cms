@@ -1,5 +1,5 @@
 
-h2 { margin-top: 0px; }
+h2 { margin-top: 0px; font-size: 40px;}
 
 body {
   text-rendering: optimizeLegibility;
@@ -25,12 +25,11 @@ canvas {
 
 
 .banner {
-  font-style: italic;
-  text-align: center;
+  width: 100%;
 }
 
 .title {
-  font-size: 4vh;
+  font-size: 2.5em;
   text-align: center;
 }
 
@@ -55,6 +54,9 @@ p {
   margin-bottom: 1.5em;
 }
 
+.nav { 
+}
+
 .nav ul {
   list-style-type: none;
   margin: 0;
@@ -63,13 +65,11 @@ p {
 }
 
 .nav li {
-  float: left;
+  display: block;
 }
 
 .nav a {
-  display: block;
   text-align: center;
-  padding: 14px 16px;
 }
 
 #footer {
@@ -109,10 +109,14 @@ p {
 @media (min-width: 600px) {
   .grid { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
   .container { width: 66ch; margin-left: auto; margin-right: auto; }
+  .banner { margin: 1em; text-align: center;}
+  h2 { font-size: 60px; }
 }
 
 @media (min-width: 1000px) {
   .grid { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
   .container { width: 100ch; margin-left: auto; margin-right: auto; }
+  .banner { margin: 1em; text-align: center;}
+  h2 { font-size: 60px; }
 }
 
