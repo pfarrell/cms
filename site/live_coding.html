@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body { margin: 0px; }
+      html, body { overflow: hidden; display: inline;}
+      textarea { width: 90%; height: 75vh; display: inline; }
+      .row {display: flex; grid-auto-flow: column; }
+      .col {width:800px}
+      .midcol {width:40px}
+      .dot {height: 10px; width: 10px; border-radius: 50%; display: inline-block; }
+      .red { background-color: red;}
+      .green { background-color: green;}
+      #log { font-family: "Lucida Console", "Courier New", monospace; font-size: 0.875em; }
+    </style>
+    <script src="lib/codemirror.js"></script>
+    <script src="lib/addon/hint/show-hint.js"></script>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <link rel="stylesheet" src="lib/addon/hint/show-hint.css"></script>
+    <script src="lib/addon/hint/javascript-hint.js"></script>
+    <script src="lib/mode/javascript/javascript.js"></script>
+    <script>
+    </script>
+</script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col"><canvas id="view"></canvas>
+      </div>
+      <div class="midcol">
+      </div>
+      <div class="col">
+        <textarea id="code"></textarea>
+        <p>
+        <ul><li>Highlight a number.  Hit left-ctrl to toggle data slider on or off.</li></ul>
+        </p>
+        <p id="log"></p>
+      </div>
+    </div>
+
+  </body>
+  <script language="JavaScript">
+    var textarea = document.getElementById('code');
+    var myCodeMirror = CodeMirror.fromTextArea(textarea, {
+          autofocus: true,
+          lineNumbers: true,
+          tabSize: 4,
+          smartIndent: true,
+          styleSelectedText: true,
+          extraKeys: {
+                "Ctrl-Space": "autocomplete",
+          },
+          mode: {
+            name: "javascript",
+            globalVars: true,
+          }
+
+        });
+      myCodeMirror.setSize("1000px", "600px");
+      myCodeMirror.on("change", draw);
+      var codeToImageMode = false;
+      var added_elements = [];
+
+      document.addEventListener('keydown', keyPressed);
+
+    function log(text) {
+      document.getElementById("log").innerHTML = text.replace(/\n\r?/g, '<br/>');
+    }
+
+    function working(isWorking) {
+      var color = isWorking ? "green" : "red";
+      return '<span class="dot ' + color + '"></span>'
+    }
+
+
+    function keyPressed(e) {
+      log(e.code);
+      switch(e.code) {
+        case "ControlRight":
+        case "ControlLeft":
+          if(added_elements.length == 0) {
+            let selText = myCodeMirror.getSelection();
+            if(selText) {
+              var func = determineSlider();
+              if(func) {
+                func(selText);
+              }
+            }
+          } else {
+            removeElement();
+          }
+          break;
+        case "AltRight":
+        case "AltLeft":
+          codeToImage();
+          break;
+        case "Escape":
+          removeElement();
+          break;
+        }
+    }
+
+    function codeToImage() {
+      codeToImageMode = !codeToImageMode;
+      if(codeToImageMode) {
+        document.body.style.cursor = "url(img/mag.png) 4 12, auto";
+        log(myCodeMirror.getSelection());
+      } else {
+        document.body.style.cursor = "auto";
+      }
+    }
+
+    function determineSlider() {
+      let selText = myCodeMirror.getSelection();
+      if(selText.length == 0) {
+        return null;
+      } else if(isColor(selText)) {
+        return toggleColorPicker;
+      } else if(!isNaN(selText)) {
+        return toggleSlider;
+      } else {
+        return null;
+      }
+    }
+
+    function isColor(str) {
+      const pat = /^#?[a-f0-9]{6}$/;
+      return str.match(pat);
+    }
+
+
+    function draw(cm) {
+      ctx.clearRect(0,0,canvas.width,canvas.height)
+      var code = cm.getValue();
+      try {
+        log(working(true));
+        eval(code);
+        last_working_code = code;
+      }catch(error) {
+        log("<div>" + working(false) + " line " + error.lineNumber+ ": " + error + "</div>");
+        eval(last_working_code);
+      }
+    }
+
+
+
+    function toggleColorPicker(highlit) {
+      let origCursor = myCodeMirror.getCursor();
+      let picker = document.createElement('input');
+      picker.id = "myPicker";
+      picker.type = "color";
+      picker.style = 'position:absolute;right:950px;top:650px;';
+      picker.addEventListener('input', updateColor);
+      added_elements.push(picker);
+      document.body.appendChild(picker);
+    }
+
+    function toggleSlider(highlit) {
+      let origCursor = myCodeMirror.getCursor();
+      if(highlit.length > 0) {
+        if(!isNaN(highlit)) {
+          let origValue = parseInt(highlit);
+          let bumper = Math.floor(origValue * 1.5);
+          let range = document.createElement('input');
+          range.id = 'myRange';
+          range.type = 'range';
+          range.style = 'position:absolute;right:950px;top:650px;';
+          range.min=origValue - bumper;
+          range.max=origValue + bumper;
+          range.step=1;
+          range.value=origValue;
+          range.addEventListener('input', updateInt);
+          added_elements.push(range);
+          document.body.appendChild(range);
+        }
+      }
+    }
+
+    function updateColor(e) {
+      log(e.target.value);
+    }
+
+    document.addEventListener('select', onSelect);
+
+
+
+    function onSelect(evt) {
+      var selectedLength = myCodeMirror.getSelection().length;
+      // calculate direction by getting text range and comparing to getSelection
+      var cu = myCodeMirror.getCursor();
+      origCursor = cu;
+      lastCursorPos = cu.ch;
+    }
+
+    function updateInt(e) {
+      prevSel = myCodeMirror.getSelection();
+      myCodeMirror.replaceSelection(e.target.value);
+      var st = lastCursorPos - prevSel.toString().length;
+      var en = st + e.target.value.toString().length;
+      myCodeMirror.setSelection({line: origCursor.line, ch: st}, {line: origCursor.line, ch: en});
+      lastCursorPos = en;
+    }
+
+    function removeElement() {
+      var elem = added_elements.pop();
+      if(elem) {
+        document.body.removeChild(elem);
+        origCursor = null;
+      }
+    }
+
+    function getDefaultText(elem) {
+      var request = new XMLHttpRequest();
+      request.open('GET', 'https://raw.githubusercontent.com/pfarrell/live_coding/main/test/tree_demo.js', true);
+      request.send(null);
+      request.onreadystatechange = function () {
+          if (request.readyState === 4 && request.status === 200) {
+              var type = request.getResponseHeader('Content-Type');
+              if (type.indexOf("text") !== 1) {
+                  elem.setValue(request.responseText);
+              }
+          }
+      }
+    }
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var last_working_code;
+    var time=0;
+    canvas.height=600;
+    canvas.width=600;
+    getDefaultText(myCodeMirror);
+    draw(myCodeMirror);
+
+  </script>
+</html>
+
