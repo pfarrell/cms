@@ -15,7 +15,7 @@ build-prod: clean
 	@cp site/*.pdf dist/
 
 clean:
-	@rm -rf dist/css dist/img dist/js
+	@rm -rf dist/css dist/img dist/js dist/lib
 	@rm -f dist/*
 
 black:
