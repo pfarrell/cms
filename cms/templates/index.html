@@ -11,13 +11,15 @@
     <img src="{{ post.image }}" />
     <div class="text">
       <h3>{{ post.title }}</h3>
-      <p>
+      <p class="summary">
         {{ post.summary }}
       </p>
-      {% if 'projectLink' in post %}
-      <p><a class="btn-default" href="{{ post.projectLink }}" target="_">See it In Action!</a><p>
-      {% endif %}
-      <a class="btn-default" href="{{ post.date }}-{{ post.kebab}}.html">Read More</a>
+      <div class="links">
+        <p><a class="btn-default" href="{{ post.date }}-{{ post.kebab}}.html">Read More</a><p>
+        {% if 'projectLink' in post %}
+        <p><a class="btn-default" href="{{ post.projectLink }}" target="_">See it In Action!</a><p>
+        {% endif %}
+      </div>
     </div>
   </article>
   {% endfor %}

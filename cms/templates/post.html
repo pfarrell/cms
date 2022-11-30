@@ -5,14 +5,19 @@
     </style>
 {% endblock %}
 {% block content %}
-    <div class="title">
-      <h2>{{ title }}</h2>
+    <div class="content">
+      <div class="banner">
+        <h1>{{ title }}</h1>
+        <div class="bottom">
+          <p class="article-date">{{ date }}</p>
+        </div>
+      </div>
       <hr />
-    </div>
-    <div class="important">
-    {% markdown %}
-      {{ content|safe }}
-    {% endmarkdown %}
+      <div class="important">
+      {% markdown %}
+        {{ content|safe }}
+      {% endmarkdown %}
+      </div>
     </div>
 {% endblock %}
 

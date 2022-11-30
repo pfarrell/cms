@@ -6,9 +6,16 @@ body {
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
+  background-image: url("../img/gray_stripe_bg.png");
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on;
+}
+
+.content {
+  background-color: white;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .container {
@@ -24,15 +31,32 @@ canvas {
   border: 2px solid #374343; 
 }
 
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 1em 1em 0em 1em;
+  opacity: .5;
+}
+
+.banner {
+   background-color: white;
+   padding-bottom: 10px;
+   margin: 0;
+   border-radius: 10px 10px 0px 0px;
+   position:relative;
+ }
 
 .banner > h1 {
   width: 100%;
   letter-spacing: 4px;
+  margin-top: 0;
 }
 
 .banner > h5 {
   margin-top: -30px;
   font-style: italic;
+  text-align: center;
 }
 
 .title {
@@ -42,6 +66,10 @@ canvas {
 
 a {
   color: #279995;
+}
+
+.btn-default::parent {
+  text-align: center;
 }
 
 .btn-default {
@@ -91,6 +119,7 @@ p {
 }
 
 .grid > article {
+  background-color: #ffffff;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -99,8 +128,18 @@ p {
 }
 
 .grid .text {
-  padding:1em;
   text-align: left;
+}
+
+.summary {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.text h3 {
+  padding-left: 1em;
+  padding-right: 1em;
+  text-align: center;
 }
 
 .grid > article img {
@@ -109,14 +148,35 @@ p {
   vertical-align: middle;
 }
 
-.grid .text {
-  padding: 20px;
+.grid > article .links {
+  text-align: center;
 }
+
+article {
+  position: relative;
+  text-align: center;
+}
+
+.article-date { 
+  font-style: italic;
+  display: inline;
+  right: 0;
+}
+
+.time-to-read { 
+  display: inline;
+  left :0;
+}
+
+.important {
+  background-color: white;
+}
+
 
 @media (min-width: 600px) {
   .grid { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
   .container { width: 66ch; margin-left: auto; margin-right: auto; }
-  .banner { margin: 1em; text-align: center;}
+  .banner { text-align: center;}
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
 }
@@ -124,7 +184,7 @@ p {
 @media (min-width: 1000px) {
   .grid { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
   .container { width: 100ch; margin-left: auto; margin-right: auto; }
-  .banner { margin: 1em; text-align: center;}
+  .banner { text-align: center;}
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
 }
