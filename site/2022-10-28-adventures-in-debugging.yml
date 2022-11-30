@@ -8,7 +8,7 @@ summary: Debugging is twice as hard as writing a program in the first place
 image: img/rubber_ducky.png
 ---
 ###Item 1: The Airball
-I'm working at my first computer job. It's a great first job. I do tech support, programming, sales support, training, and anything else that comes up. It's 2000 and our main product is a OCR scanning solution for data entry shops that we resell and customize. The software is distributed and has a licensing system that allows for complex deployments. Think of having several workstations dedicated to running scanners all day long, some really powerful computer doing the OCR jobs, and then a bunch of data entry people sitting at other workstations checking the OCR output and you're thinking of the systems we sell. 
+I'm working at my first computer job. I do tech support, programming, sales support, training, and anything else that comes up. It's 2000 and our main product is a OCR scanning solution for data entry shops that we resell and customize. The software is distributed and has a licensing system that allows for complex deployments. Think of having several workstations dedicated to running scanners all day long, some really powerful computer doing the OCR jobs, and then a bunch of data entry people sitting at other workstations checking the OCR output and you're thinking of the systems we sell. 
 
 It's a great product, but, being distributed, things can go wrong. Finding and fixing the issues ends up teaching me a lot about computer systems in the real world, but today I'm faced with a huge problem. Nothing is working for a particular client.
 
