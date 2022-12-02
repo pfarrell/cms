@@ -18,6 +18,12 @@ body {
 .content {
 }
 
+.content img {
+  max-width: 100%;
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
 .container {
   width: 32ch;
   margin-left: auto;
@@ -34,20 +40,13 @@ canvas {
   border: 2px solid #374343; 
 }
 
-.bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 1em 1em 0em 1em;
-  opacity: .5;
-}
-
 .banner {
    margin-bottom:1em;
    background-color: white;
    padding-bottom: 1em;
    border-radius: 10px 10px 0px 0px;
    position:relative;
+   text-align:centeree;
  }
 
  .banner .shrunk { 
@@ -100,7 +99,7 @@ p {
   margin-top: 5px;
   border-radius: 10px 10px 0px 0px;
   background-color: white;
-  padding: 1em;
+  padding: 1em .25em 1em;
 }
 
 .nav ul {
@@ -110,9 +109,11 @@ p {
   overflow: hidden;
 }
 
+.nav li:first-child { margin-left: 0; }
+
 .nav li {
   display: inline;
-  margin: 1em;
+  margin: .25em;
 }
 
 .nav a {
@@ -172,7 +173,7 @@ article {
 .article-date { 
   font-style: italic;
   display: inline;
-  right: 0;
+  opacity: .5;
 }
 
 .time-to-read { 
@@ -192,14 +193,13 @@ article {
   .banner .shrunk { font-size: 50px; }
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
+  li { margin-bottom: 0 1em 1em 1em; }
+  .nav li { display: inline; margin: 1em;
+}
 }
 
 @media (min-width: 1000px) {
   .grid { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
   .container { width: 100ch; margin-left: auto; margin-right: auto; }
-  .banner { text-align: center;}
-  .banner .shrunk { font-size: 50px; }
-  h1 { font-size: 65px;}
-  h2 { font-size: 60px; }
 }
 
