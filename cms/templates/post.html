@@ -13,15 +13,16 @@
           {% set titleClass = 'full' %}
         {% endif %}
         <h1 class="{{ titleClass }}">{{ title }}</h1>
-        <div class="bottom">
-          <p class="article-date">{{ date }}</p>
-        </div>
       </div>
       <hr />
       <div class="important">
       {% markdown %}
         {{ content|safe }}
       {% endmarkdown %}
+      <hr>
+      <div class="bottom">
+        <p class="article-date">posted {{ date }}</p>
+      </div>
       </div>
     </div>
 {% endblock %}
