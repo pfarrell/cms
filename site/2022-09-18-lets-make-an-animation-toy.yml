@@ -2,7 +2,6 @@
 date: '2022-09-18'
 id: 1663523096
 kebab: lets-make-an-animation-toy
-published: false
 title: Let's Make an Animation Toy
 summary: Limited demo of using Javascript to write an IDE in the browser
 image: img/mt_sshot_2.gif
