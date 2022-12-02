@@ -7,7 +7,12 @@
 {% block content %}
     <div class="content">
       <div class="banner">
-        <h1>{{ title }}</h1>
+        {% if title|length > 25 %}
+          {% set titleClass = 'shrunk' %}
+        {% else %}
+          {% set titleClass = 'full' %}
+        {% endif %}
+        <h1 class="{{ titleClass }}">{{ title }}</h1>
         <div class="bottom">
           <p class="article-date">{{ date }}</p>
         </div>

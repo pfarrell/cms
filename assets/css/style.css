@@ -16,15 +16,15 @@ body {
 }
 
 .content {
-  background-color: white;
-  padding-left: 1em;
-  padding-right: 1em;
 }
 
 .container {
   width: 32ch;
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 h1 { font-size: 45px;}
@@ -48,6 +48,10 @@ canvas {
    padding-bottom: 1em;
    border-radius: 10px 10px 0px 0px;
    position:relative;
+ }
+
+ .banner .shrunk { 
+   font-size: 30px; 
  }
 
 .banner > h1 {
@@ -185,6 +189,7 @@ article {
   .grid { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
   .container { width: 66ch; margin-left: auto; margin-right: auto; }
   .banner { text-align: center;}
+  .banner .shrunk { font-size: 50px; }
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
 }
@@ -193,6 +198,7 @@ article {
   .grid { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
   .container { width: 100ch; margin-left: auto; margin-right: auto; }
   .banner { text-align: center;}
+  .banner .shrunk { font-size: 50px; }
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
 }
