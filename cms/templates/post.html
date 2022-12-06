@@ -5,14 +5,14 @@
     </style>
 {% endblock %}
 {% block content %}
-    <div class="content">
+    {% if title|length > 25 %}
+      {% set titleClass = 'shrunk' %}
+    {% else %}
+      {% set titleClass = 'full' %}
+    {% endif %}
+    <div class="content {{titleClass}}">
       <div class="banner">
-        {% if title|length > 25 %}
-          {% set titleClass = 'shrunk' %}
-        {% else %}
-          {% set titleClass = 'full' %}
-        {% endif %}
-        <h1 class="{{ titleClass }}">{{ title }}</h1>
+        <h1>{{ title }}</h1>
       </div>
       <hr />
       <div class="important">

@@ -18,10 +18,12 @@ body {
 .content {
 }
 
+
 .content img {
   max-width: 100%;
   margin-bottom: 1em;
   margin-left: 1em;
+  border-radius: 5px;
 }
 
 .container {
@@ -49,9 +51,14 @@ canvas {
    text-align:centeree;
  }
 
- .banner .shrunk { 
-   font-size: 30px; 
+ .shrunk .banner h1{ 
+   font-size: 35px; 
  }
+
+ .shrunk h2 {
+   font-size: 30px;
+ }
+
 
 .banner > h1 {
   width: 100%;
@@ -74,13 +81,9 @@ a {
   color: #279995;
 }
 
-.btn-default::parent {
-  text-align: center;
-}
-
 .btn-default {
   background-color: #EEEEEE;
-  padding: 8px 20px;
+  padding: 8px 10px;
   text-decoration:none;
   font-weight:bold;
   border-radius:5px;
@@ -190,7 +193,8 @@ article {
   .grid { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
   .container { width: 66ch; margin-left: auto; margin-right: auto; }
   .banner { text-align: center;}
-  .banner .shrunk { font-size: 50px; }
+  .shrunk .banner h1{ font-size: 60px; }
+  .shrunk h2 { font-size: 45px; }
   h1 { font-size: 65px;}
   h2 { font-size: 60px; }
   li { margin-bottom: 0 1em 1em 1em; }

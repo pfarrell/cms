@@ -6,6 +6,46 @@ title: Building the History of the Periodic Table
 summary: Project notes on constructing the periodic table from scratch
 projectLink: periodic_table.html
 image: img/periodic_table.png
+source: https://github.com/pfarrell/periodic_table
 ---
-This project occurred to me looking at the current "complete" periodic table and thinking back to what it looked like when I was in grade school (Unnilhexium, anyone?).  Thinking about the history of the thing, I thought I would be neat to have an interactive view of how the table :B1
+[![Periodic Table](img/periodic_table.gif){style="max-height:400px;margin: auto; display: block;"}](periodic_table.html)
 
+This project occurred to me looking at the current "complete" periodic table and thinking back to what it looked like when I was in grade school (Unnilhexium, anyone?).  Thinking about the history of the thing, I thought I would be neat to have an interactive view of how the table.
+
+You can see the current working product [here](periodict_table.html). I was heavily inspired by the [PubChem website](https://pubchem.ncbi.nlm.nih.gov/periodic-table/), but when I started looking at the source, it was based on a lot of modern tooling, custom fonts, Nodejs, React, and had no source to render.  As an adherent of the open web, I thought I'd like to recreate it in a different way. 
+
+## Guiding Principles
+I want to create a visualization of the periodic table.  These guiding principals help make decision and influence the design of the project.  I want to build a working, interactive display of the periodic table which is **self-contained**, **easy to understand**, and **visually appealing**, and **easy to augment** with  new filterings.  To accomplish this, I had a few principles to help guide solutions to challenges.
+
+### 1. Minimal Javascript
+JavaScript is powerful, but comes at a cost of added complexity.. Resist JavaScript, except where necessary.
+
+* For the detail view and date slider, using code will be ok.  For any styling issues, let's make it work with css.  
+
+### 2. Keep It Local
+As much as possible, everything needed to render the page should be in the source file.
+
+* With HTML5, we can use custom data attributes to store information right in the elements.  This will prevent us from having to make a network call and will make the page much more responsive
+* After the project is working, we can see how much effort it would be to embed the images themselves in the page, that and not using an external css file would truly make this page self-contained
+
+### 3. Don't Reinvent the Wheel
+To render their page, PubChem supplies a JSON file information about each element (chemical, not HTML).  We should use this and extend it for our purposes.
+
+* The JSON file supplied to PubChem's website is a good place to start.  Using some fancy regex, or simple programs, we can update the json document to add new features (like image urls)
+![pubchem json](img/pub_chem_json.png){style="margin:auto; display::block;"}
+
+* Storing our data in JSON also allows us to make a data-driven script to build the HTML structure, which is essential to the next step 
+
+### 4. Rapid iterations
+There are 118 unique elements with.  We shouldn't be manually editing the final html file to deal with them.   The best way to handle this is to have the computer do it for us.
+
+* We are manipulating several concepts at the same time, so having as rapid a feedback loop as possible will help keep things sane.  We have the JSON file, the CSS, JavaScript, and the HTML itself.
+* Scripts created for this project included 
+	* Reformatting the JSON to help generate the HTML table element
+	* parsing the JSON document to produce the HTML table element and it's children
+	* Extracting summaries from wikipedia and adding them to the JSON document
+ 
+## Further Reading
+  [![Superheavy book](img/superheavy_book.jpg){style="margin: auto; display: block"}](https://www.goodreads.com/book/show/40653150-superheavy)
+
+In research during this project, I found the book, *Superheavy*, by Kit Chapman.  It describes the history of the discoveries of the synthetic elements and the people behind them and was very entertaining.
