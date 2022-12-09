@@ -1,0 +1,30 @@
+---
+date: '2022-12-08'
+id: 1670547530
+image: img/easy_to_be_hard.jpg
+kebab: easy-to-be-hard
+summary: Sometimes things that seem hard are easy and vice versa.  Thoughts on the It Shouldn't Be Too Hard Fallacy
+title: Easy To Be Hard
+---
+I have a theory that product managers often inversely estimate the difficulty of feature requests.  I call it the "It Shouldn't Be Too Hard" fallacy.  
+
+Many times I've had a PM cautiously explaining a needed feature and almost apologizing for how hard it will be, while I'm knowing it will actually be simple to implement.  I'll later experience the exact opposite.  A manager casually commits us to something that seems simple, but is, in fact, exceedingly difficult to accomplish.
+
+I was working on research for my web apis series and was keeping some notes in a spreadsheet.  I had an idea for something I wanted to do which I don't think exists.  It occurred to me, this was a perfect example of me being in the PM's shoes, committin this fallacy.
+
+I was using Google Sheets and had an idea that I wanted to split a cell in half while keeping both of these cells as part of the same column.  Surely this must exist.  I mean, *merging cells* is a thing.  Why can't you just do the opposite.  "It Shouldn't Be Too Hard", right?
+
+I gave it some thought and the idea of this feature started snowballing in complexity.
+
+* How will you address these two sub-cells in formulas?
+* Will conditional formatting apply to each sub-cell or would it affect the whole cell?
+* What happens if you split a splitted cell?
+* What if you split one of those, how do you address those?
+* How does resizing affect the sub-cells?
+* What about backwards compatibility?
+
+These are all questions that *can* have answers, but they're not obvious and will definitely upset some users.
+
+A simpler idea occurred to me.  I really only wanted this feature for formatting.  I could accomplish the same thing with a tab.
+
+A guiding principal for software engineers is this.  A good product manager should be trying to push the product forward.  You should be open to hearing them out.  Even if you think the idea is crazy.  You'll develop a healthy relationship with product if you can have empahty for the PM,  push them to describe the customer need or goal, not the implementation, and by doing this, get at the core thing they need.  That will build a great relationship with product.
