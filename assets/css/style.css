@@ -76,6 +76,12 @@ canvas {
   max-height: 16em;
 }
 
+banner > projectLink {
+  margin-left: 0;
+  margin-right: 0;
+  display: block;
+}
+
 .title {
   font-size: 2.5em;
   text-align: center;
