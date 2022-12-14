@@ -3,14 +3,25 @@ date: '2022-09-28'
 id: 1664372884
 kebab: ego-and-the-tao-of-programming
 title: Ego and the Tao of Programming
-summary: Essay on thoughts about growing into team based development
+summary: Get yourself out of your code
 image: img/yin_yang.png
 ---
+One of the worst production issues I've caused resulted in one of the best interactions I've had with a manager.
 
-I've had a television show in my mind for a long time. My father is an excellent storyteller with a superhuman ability to remember people and events. The show would be germinated from stories I heard of his career in Indianapolis in the 1970's and 80's.  Mirroring the establishment of a law firm is the growth of a city. Being a lawyer show, it could return to an episodic nature. 
+It was tax season and I was working for the state website and was at the most dangerous time in software person's career, about 5 years experience.  Confident, but still untested.  Today was the day that would bite me.  
 
-But the main theme wouldn't center around my father, it would be about his boss, who build a hugely successful practice, created a respected firm, then drove it into the ground and is now back to being a lawyer. The main thing is the ambition and drive to create the fire is the same thing that eventually extinguishes it.
+I was a subject matter expert on the billing system and had worked supporting and extending it for several years.  Due to regulatory requirements, we had to add some columns for PCI compliance.  We had already deployed this change in other offices and hadn't had any issues, but that wasn't during tax time.  Our traffic was substantially higher and, for me at the time, that was an unknown unknown.
 
+So, without checking with anyone, I fire up my script to apply the change to the staging database.  No issues.  But when I run it on production, the script doesn't immediately return.  I give it twenty seconds and then I hear the on duty pager going off.
 
+Long story short, my script has caused a table lock which may have escalated to a database lock while the script is being applied.  We let it complete (which it does after about 15 minutes, having been blocked from completing by open transactions IIRC).  
 
-Back to my show idea though... When I mentiooned it to my sister, she said "It sounds good, but it sounds a lot like Mad Men." <pencil snap.gif>
+Remember it's tax time.  My little escapade has caused citizens from being able to complete their income tax for about 20 minutes.
+
+![statue showing a facepalm](img/cain_facepalm.jpg){style=margin:auto;display:block;}
+
+As we were assessing the damage, I'm nearly in tears at my desk.  My manager calls me into his office.  I'm assuming I'm getting fired on the spot.  He gives me some of the best advice I've turned over in my head for years.  "I want you to stop using the word *I* when you're talking about code.  You made a mistake and it happens to all of us.  It's huge problem if it happens again, but this can happen and you need to learn to let it go."
+
+He was spot on.  I definitely had my ego wrapped up in my work.  I had to find a balance between wanting to deliver, wanting to grow, wanting to be the best, and realizing that I would make mistakes.  It was a new feeling to me that a few key presses could cause so much damage.
+
+It's not like I didn't get punished though.  I had to watch all my co-workers work late calling everyone who'd had issues during our payment system outage.
