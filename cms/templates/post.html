@@ -13,6 +13,12 @@
     <div class="content {{titleClass}}">
       <div class="banner">
         <h1>{{ title }}</h1>
+        {% if headerImage %}
+        <img class="headerImage" src="{{ headerImage }}" />
+        {% endif %}
+        {% if projectLink %}
+        <a class="btn-default  projectLink" href="{{ projectLink }}">See it In Action!</a>
+        {% endif %}
       </div>
       <hr />
       <div class="important">

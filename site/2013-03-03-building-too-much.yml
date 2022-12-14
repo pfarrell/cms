@@ -5,6 +5,7 @@ kebab: building-too-much
 title: "Building too Much"
 summary: Build the smallest, least complex thing that solves your problem.
 image: img/rube-goldberg-machine.jpg
+headerImage: img/rube-goldberg-machine.jpg
 ---
 This is the story of the time I learned about scope creep.  
 
