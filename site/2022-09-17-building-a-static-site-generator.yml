@@ -5,8 +5,9 @@ kebab: building-a-static-site-generator
 title: Building a Static Site Generator to Build This Site
 summary: Project notes from building a quick and dirty static site generator
 image: img/gemfield.gif
+projectLink: https://github.com/pfarrell/cms
 ---
-I've liked [jeckyll](https://jekyllrb.com/), a static site generator written in Ruby, but why not see if I could build our own thing?
+I've liked [jekyll](https://jekyllrb.com/), a static site generator written in Ruby, but why not see if I could build our own thing?
 
 ## Step one... What are we doing?
 We're going to build a bare bones blogging tool.  It's going to be used to allow easy authoring of blog posts and allow us to store those posts in git.
@@ -19,16 +20,14 @@ The biggest impediment to personal projects is putting up boundaries.
 
 Let's make some upfront decisions and write them down. When we're building for ourselves, it's too easy to go off on tangents.  Having a written down plan helps stay out of rabbit holes.
 
-### The PLAN
-```
+### The Plan
 1. Writing is hard enough.  This tool should stay out of the way when we're writing.  
-2. No database until we absolutely need one.
-3. I should be able to write and see my results quickly.  Live updates would be nice, but a publish step is ok in the early days.
-4. Don't waste time mucking with styling while writing.  See 1.
-5. Don't forget some problems are solved.
-6. Editing is writing, so, it should be as easy as writing.
-7. No need for dynamic page generation, the output should just be html files and assets.
-```
+1. No database until we absolutely need one.
+1. I should be able to write and see my results quickly.  Live updates would be nice, but a publish step is ok in the early days.
+1. Don't waste time mucking with styling while writing.  See 1.
+1. Don't forget some problems are solved.
+1. Editing is writing, so, it should be as easy as writing.
+1. No dynamic page generation at serve time, the output should just be html files and assets.
 
 Notice I don't have many technical requirements in the plan?  That's because my goals are locked into demonstrating some framework or tool.  But we do have to do something, so sketch the app.  
 
@@ -37,4 +36,6 @@ Notice I don't have many technical requirements in the plan?  That's because my 
 In order to satisfy 1 and 4 in our plan, there exists a templating tool in Python called Jinja2. Flask uses it by default, but we're going even simpler.  We're going to ship our project without Flask. So let's start there.  There may be other tools we can use, but we'll delay deciding on that until the problem if fully in front of us.
 
 For 4 and 6, I do think it would be good to use something like Markdown for our writing format.  It allows us to do some simple formatting without worrying too much about formatting.
+
+Jekyll has this concept of `frontmatter`, a formatting that has you put meta information about a post at the beginning of a document in an area that's not rendered.  Python's `frontmatter` library will allow us to do this.  That will allow us some database-like capabilities without the db.
 
