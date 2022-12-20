@@ -7,10 +7,10 @@ summary: Project notes on constructing the periodic table from scratch
 projectLink: periodic_table.html
 image: img/periodic_table.png
 source: https://github.com/pfarrell/periodic_table
-headerImage: img/periodic_table.gif
 ---
+<img src="img/periodic_table.gif" />
 
-This project occurred to me looking at the current "complete" periodic table and thinking back to what it looked like when I was in grade school (Unnilhexium, anyone?).  Thinking about the history of the thing, I thought I would be neat to have an interactive view of how the table.
+This project occurred to me looking at the current "complete" periodic table and thinking back to what it looked like when I was in grade school (Unnilhexium, anyone?).  Thinking about the history of the thing, I thought I would be neat to have an interactive view of how the table has changed over time.
 
 You can see the current working product [here](periodic_table.html). I was heavily inspired by the [PubChem website](https://pubchem.ncbi.nlm.nih.gov/periodic-table/), but when I started looking at the source, it was based on a lot of modern tooling, custom fonts, Nodejs, React, and had no source to render.  As an adherent of the open web, I thought I'd like to recreate it in a different way. 
 

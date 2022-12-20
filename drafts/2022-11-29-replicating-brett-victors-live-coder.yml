@@ -1,11 +1,13 @@
 ---
 date: '2022-11-29'
 id: 1669750426
-image: update me
+image: img/live_coding_demo.gif
 kebab: replicating-brett-victors-live-coder
-projectLink: null
+projectLink: live_coding.html
 summary: Write a summary
 title: Replicating Brett Victor's Live Coder
 ---
-
-None
+"Inventing on Priciple" is one of the great, evergreen presentations.  It's an inspiring talk about 
+<div style="text-align: center">
+<iframe style="maring: auto" width="560" height="315" src="https://www.youtube.com/embed/PUv66718DII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
