@@ -1,0 +1,44 @@
+---
+date: '2022-12-26'
+headerImage: null
+id: 1672094101
+image: img/life.gif
+kebab: yet-another-game-of-life
+projectLink: life.html
+sourceLink: https://github.com/pfarrell/canvas/blob/master/gol.html
+summary: Project notes on implementing a dead simple game of life.
+title: Yet Another Game of Life
+---
+![Game of life animation](img/life2.gif)
+[Source Link](https://github.com/pfarrell/canvas/blob/master/gol.html){class=btn-default}
+
+This project was my first try at implementing a game of life simulator.  I won't bother going into a long intrduction of what the game of life is.  [Wikipedia's](https://en.wikipedia.org/wiki/The_Game_of_Life) article provides everything you need.
+
+This projext is another in a series of self-contained canvas projets.  I wanted to documen this first pass before I do a folluw up trying to improve on the performances and limitations I had building this one.
+
+### Project Notes
+This simiulator's biggest limitation is that it has a finite play field.  This causes boundaries to interrupt cell's growth.
+
+### Interesting Things
+* Configurable playfield size
+* Configurable framerate
+* Ability to click and drag to set cells
+* Calculating Interception when drawing lines of cells
+
+### Improvement Opportunities
+
+**Randomization**: It seems like it only selects odd numbered cells.
+
+**Paintbrush**: It would be nice to have a paintbrush or stamp that would let you draw interesting shapes (gosper guns for example)
+
+**Limited Game Field**: It would be much more interesting to find an efficient was to have an infinite game field.  This probably will go along with the next point
+
+** Performance**: We can probably also to a much more efficient calculation of the next game state by visiting only populated cells and their neighbors instead of looping over every cell.  The naive use of an array to hold the game state is easy to understand, but wastes a lot of memory on empty cells.
+
+**Using Global Variables**: A pet peeve and technical debt concession I make in animation is to use globabl variables to hold state between renders.  It is worth examining if we are able to bind existing variables to the next renders function and pass this to `setAnimationFrame` instead of using a timeout.  
+
+**Save Game State**: V1 allows you to capture the game state at any point, but doesn't allow you to easily save or load these states.  We should consider addressing this.
+
+**Use Offscreen Canvas**: We should use [offscreen canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+
+**Better Colors**: Why not have cell age bind to a range of colors?  Or use many colors and combine them based on parents?  If we do this, let's think of a way to keep colors from converging to goop.
