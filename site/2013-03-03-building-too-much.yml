@@ -19,7 +19,7 @@ We were doomed from the start.
 
 Among my duties, I was tasked with designing and implementing a testing framework.  It would handle unit testing, release testing, integration testing, load testing.  It was my first major greenfield project
 
-After lots of contemplation, I came up with the most awesome design proposal I could muster.  I didn't know the word, but I wanted to build an testing [DSL](http://en.wikipedia.org/wiki/Domain-specific_language)
+After lots of contemplation, I came up with the most awesome design proposal I could muster.  I didn't know the word, but I wanted to build a testing [DSL](http://en.wikipedia.org/wiki/Domain-specific_language)
 
 I proposed to create a higher level language, in XML (this was 2004, after all), that would activate certain functions to produce tests.  Probably be really easy.
 
@@ -58,7 +58,7 @@ There's something about explaining to others that helps you hear it anew.
     
 I was planning to go through a lot of crazy effort to create a custom version of Java that 
 
-*  wouldn't be compiled
+*  would have to be compiled twice
 *  would be less efficient than Java code
 *  would hide compiler bugs till runtime
 *  would be maintained by me
