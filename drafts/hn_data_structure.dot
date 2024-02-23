@@ -1,0 +1,22 @@
+digraph {
+  rankdir=LR;
+  edge [ contstraint=false ];
+  node [shape=record];
+
+  bq [label="<f0>title|<f1>url|<f2>text|<f3>dead|<f4>by|<f5>score|<f6>time|<f7>timestamp|<f8>type|<f9>id|<f10>parent|<f11>descendants|<f12>ranking|<f13>deleted"];
+  fb [label="<f0>by|<f1>descendants|<f2>id|<f3>kids|<f4>score|<f5>time|<f6>title|<f7>type|<f8>url|<f9>parent|<f10>text|<f11>deleted|<f12>dead|<f13>parts|<f14>poll"];
+
+  bq:f4->fb:f0;
+  bq:f11->fb:f1;
+  bq:f9->fb:f2;
+  bq:f5->fb:f4;
+  bq:f6->fb:f5;
+  bq:f0->fb:f6;
+  bq:f8->fb:f7;
+  bq:f1->fb:f8;
+  bq:f10->fb:f9;
+  bq:f2->fb:f10;
+  bq:f13->fb:f11;
+  bq:f3->fb:f12;
+}
+
