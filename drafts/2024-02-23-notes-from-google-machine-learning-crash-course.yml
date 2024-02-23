@@ -1,0 +1,54 @@
+---
+date: '2024-02-23'
+headerImage: null
+id: 1708704210
+image: null
+kebab: notes-from-google-machine-learning-crash-course
+projectLink: null
+summary: Write a summary
+title: Notes from Google Machine Learning Crash Course
+---
+
+These are notes from [Google's machine learning crash course](https://developers.google.com/machine-learning/crash-course)
+
+
+* Steps in developing a model
+  * Data acquisision
+  * Data cleaning/understanding
+  * Choose a model
+  * Feature Engineering
+  * Training
+    * Calculate Loss (RMSE
+    * Learning Rate
+    * Regularization (L1, L2)
+    * Visualization (matplotlib)
+
+* Logistic Regression
+  * Linear Regression can produce models that produce unrealistic results when 
+  * Logistic Regression produces probabilities that are calibrated
+  * Uses Sigmoids (i.e. tanh) 
+  * Regulariztion helps penalizing large weights and allowing early stopping
+  * Linear logistic regression is efficient and scales to large datasets
+    * nonlineararity can be expressed using feature cross products
+  * Loss function for linear regression is squared loss, Loss function for logistic regression is Log loss
+  * Logistic regression without regularization would drive loss to 0 in higher dimensions, L2 regularization *prevents over fitting and reduces model complexity*
+
+* Classification
+  * Classification can be based on logistic regression
+    * i.e. spam if classification threshold is exceeded
+  * Accuracy measures model performance
+    * can be a poor measure if there is _class imbalance_ (i.e. positive or negative values are rare)
+    * *Precision*: True Positives / All Positive Predictions
+      * did the model make false negatives?
+    * *Recall*: True Positives / All Actual Positives 
+      * did the model miss positives
+    * Recall and precision go hand in hand in determining model efficacy
+    * we may not know in advance what classification threshold to use.
+    * a *ROC curve* (Receiver Operating Characteristics) evaluates all classifications threshold and evaluates the precision and recal for them, then draws a graph with true positive versus false positive rates
+    * *Prediction Bias*: a comparison of the average of predictions versus average of observations
+      * bias of 0 shows predictions == observations
+      * if you have bias, you have a problem in the model
+      * zero bias is not a measure of a good model
+      * calibration plots show bucketed bias
+
+     
