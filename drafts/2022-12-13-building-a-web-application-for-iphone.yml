@@ -5,7 +5,45 @@ image: update me
 kebab: building-a-web-application-for-iphone
 projectLink: null
 summary: Write a summary
-title: Building a Web Application for IPhone
+title: Building a Web Application for iPhone
 ---
 
-None
+For a minute, when the iPhone was introduced, there weren't going to be native apps.  In 2022, it seems crazy given how much money was to be made from the app store, but when it was first introduced in 2007, Apple hadn't figured out how to handle the app store or open up their phone to developers.
+
+Now, 15 years later, we've had significant advances in the apis available in browsers.  I want to revisit what is possible today by reviving a project I let go.
+
+Pigeon is an application I build to create my own mini search engine.  It had several functions including
+* accumulating links from RSS feeds
+* downloading complete copies of websites, like a micro wayback machine
+* analyzing pages to remove extraneous content
+* adding pages to a search index
+* serving a custom bookmarklet to transmit saved webpages to a web server
+
+Many sites started using content security policies which blocked my very user friendly bookmarklet from running.  I eventually made the mistake of rewriting this application in Ember.js which really prevented the application from growing.
+
+But, I've never lost the need for the application.
+
+I'm going to try to resurrect parts of this and use the iPhone's ability to serve web application.
+
+First, a test.  I'm wondering 
+* how pages get served when they're added as a web application
+  * is there any communication back to the web server?
+* what happens when the source page is updated?
+  * does the web application grab the new version?
+  * If not, how do I get fixes to uses who've installed my app?
+
+To test this out, I'll create a dead simple web page and host is on my web server.
+
+<textarea id="code_1">
+  <!DOCTYPE HTML>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  </head>
+  <body>
+    Hello, world!
+  </body>
+  </html>
+</textarea>

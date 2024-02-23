@@ -21,5 +21,9 @@ clean:
 black:
 	@PYTHONPATH=cms black cms bin
 
+open: build
+	xdg-open dist/index.html
+	
+
 deploy: build-prod
 	@rsync -e 'ssh -p 7822' -avz dist/* patfnet@mi3-ss121.a2hosting.com:/home/patfnet/public_html/
