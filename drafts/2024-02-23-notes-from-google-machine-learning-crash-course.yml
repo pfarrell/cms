@@ -33,22 +33,46 @@ These are notes from [Google's machine learning crash course](https://developers
   * Loss function for linear regression is squared loss, Loss function for logistic regression is Log loss
   * Logistic regression without regularization would drive loss to 0 in higher dimensions, L2 regularization *prevents over fitting and reduces model complexity*
 
-* Classification
-  * Classification can be based on logistic regression
+### Classification
+* Classification can be based on logistic regression
     * i.e. spam if classification threshold is exceeded
-  * Accuracy measures model performance
-    * can be a poor measure if there is _class imbalance_ (i.e. positive or negative values are rare)
-    * *Precision*: True Positives / All Positive Predictions
-      * did the model make false negatives?
-    * *Recall*: True Positives / All Actual Positives 
-      * did the model miss positives
+
+  Confusion Matrix
+
+  || Actually True | Actually False |
+  |---|---|---|
+  |Predict True| True Positive | False Positive |
+  | Prediction False| False Negative | True Negative |
+
+
+* Accuracy measures model performance
+  * *Accuracy*: Correct predictions / Total predictions
+    * _(True Positive + True Negative) / (True Positive + True Negative + False Positive + False Negative)_
+    * Accuracy doesn't tell the full story when working with a class-imbalanced data set (where big difference between number of classifications e.g. an ad was clicked where 99.9% of time ads aren't clicked
+    * Precision and Recall help in class-imbalance data sets
+
+    * *Precision*: _True Positives / (True Positive + False Positive)_
+        * What proportion of positive identifications are actually correct?
+      * did the model make false Positives often?
+
+    * *Recall*: _True Positives / (True Positive + False Negative)_
+      * What proportion of actual positives were identified correctly
+      * did the have false negatives?
     * Recall and precision go hand in hand in determining model efficacy
     * we may not know in advance what classification threshold to use.
     * a *ROC curve* (Receiver Operating Characteristics) evaluates all classifications threshold and evaluates the precision and recal for them, then draws a graph with true positive versus false positive rates
+      * Curve has two params: *True Positive Rate* (aka Recall), * False Positive Rate*: _False Positive / False Positive + True Negative_
+    * an *AUC curve* (Area Under the ROC Curve)
+      * measures the area under a ROC curve integrating from 0 to 1 for the Classification Thresholds
+      * AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values.
+      * AUC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen.
+      * Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that.
+      * Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
     * *Prediction Bias*: a comparison of the average of predictions versus average of observations
       * bias of 0 shows predictions == observations
       * if you have bias, you have a problem in the model
       * zero bias is not a measure of a good model
       * calibration plots show bucketed bias
+
 
      
