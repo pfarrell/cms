@@ -12,6 +12,7 @@ title: Notes from Google Machine Learning Crash Course
 These are notes from [Google's machine learning crash course](https://developers.google.com/machine-learning/crash-course)
 
 
+## Intro
 * Steps in developing a model
   * Data acquisision
   * Data cleaning/understanding
@@ -20,10 +21,10 @@ These are notes from [Google's machine learning crash course](https://developers
   * Training
     * Calculate Loss (RMSE
     * Learning Rate
-    * Regularization (L1, L2)
+    * Regularization (L<sub>1</sub>, L<sub>2</sub>)
     * Visualization (matplotlib)
 
-* Logistic Regression
+## Logistic Regression
   * Linear Regression can produce models that produce unrealistic results when 
   * Logistic Regression produces probabilities that are calibrated
   * Uses Sigmoids (i.e. tanh) 
@@ -31,13 +32,13 @@ These are notes from [Google's machine learning crash course](https://developers
   * Linear logistic regression is efficient and scales to large datasets
     * nonlineararity can be expressed using feature cross products
   * Loss function for linear regression is squared loss, Loss function for logistic regression is Log loss
-  * Logistic regression without regularization would drive loss to 0 in higher dimensions, L2 regularization *prevents over fitting and reduces model complexity*
+  * Logistic regression without regularization would drive loss to 0 in higher dimensions, L<sub>2</sub> regularization **prevents** over fitting and reduces model complexity*
 
-### Classification
+## Classification
 * Classification can be based on logistic regression
     * i.e. spam if classification threshold is exceeded
 
-  Confusion Matrix
+### Confusion Matrix
 
   || Actually True | Actually False |
   |---|---|---|
@@ -45,34 +46,83 @@ These are notes from [Google's machine learning crash course](https://developers
   | Prediction False| False Negative | True Negative |
 
 
+### Accuracy
 * Accuracy measures model performance
-  * *Accuracy*: Correct predictions / Total predictions
+* **Accuracy**: Correct predictions / Total predictions
     * _(True Positive + True Negative) / (True Positive + True Negative + False Positive + False Negative)_
     * Accuracy doesn't tell the full story when working with a class-imbalanced data set (where big difference between number of classifications e.g. an ad was clicked where 99.9% of time ads aren't clicked
     * Precision and Recall help in class-imbalance data sets
-
-    * *Precision*: _True Positives / (True Positive + False Positive)_
-        * What proportion of positive identifications are actually correct?
-      * did the model make false Positives often?
-
-    * *Recall*: _True Positives / (True Positive + False Negative)_
-      * What proportion of actual positives were identified correctly
-      * did the have false negatives?
+* **Precision**: _True Positives / (True Positive + False Positive)_
+    * What proportion of positive identifications are actually correct?
+    * did the model make false Positives often?
+* **Recall**: _True Positives / (True Positive + False Negative)_
+    * What proportion of actual positives were identified correctly
+    * did the have false negatives?
     * Recall and precision go hand in hand in determining model efficacy
     * we may not know in advance what classification threshold to use.
-    * a *ROC curve* (Receiver Operating Characteristics) evaluates all classifications threshold and evaluates the precision and recal for them, then draws a graph with true positive versus false positive rates
-      * Curve has two params: *True Positive Rate* (aka Recall), * False Positive Rate*: _False Positive / False Positive + True Negative_
-    * an *AUC curve* (Area Under the ROC Curve)
-      * measures the area under a ROC curve integrating from 0 to 1 for the Classification Thresholds
-      * AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values.
-      * AUC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen.
-      * Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that.
-      * Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
-    * *Prediction Bias*: a comparison of the average of predictions versus average of observations
-      * bias of 0 shows predictions == observations
-      * if you have bias, you have a problem in the model
-      * zero bias is not a measure of a good model
-      * calibration plots show bucketed bias
+* a **ROC curve** (Receiver Operating Characteristics) evaluates all classifications threshold and evaluates the precision and recal for them, then draws a graph with true positive versus false positive rates
+      * Curve has two params: **True Positive Rate** (aka Recall), **False Positive Rate**: _False Positive / (False Positive + True Negative)_
+* an **AUC curve** (Area Under the ROC Curve)
+    * measures the area under a ROC curve integrating from 0 to 1 for the Classification Thresholds
+    * AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values.
+    * AUC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen.
+    * Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that.
+    * Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
+* **Prediction Bias**: a comparison of the average of predictions versus average of observations
+    * bias of 0 shows predictions == observations
+    * if you have bias, you have a problem in the model
+    * zero bias is not a measure of a good model
+    * calibration plots show bucketed bias
 
+## Regularization for Sparsity
 
-     
+* Feature Crosses with high cardinality data can make a model not work
+* When crossing sparse features (i.e. search terms X videos): noisy coefficients
+* Need to regularize and zero out weights that are noise/rare
+
+### L<sub>1</sub> Regularization
+
+* For models with lots of sparse featuers, we would like for as many weights as possible to go to 0
+* L<sub>2</sub> Regularization minimizes the square of the weights thus removing a percentage of impact, never going to 0 completely
+* L<sub>0</sub> Regularization would penalize a model for for having non-zero weight coefficients, but this approach leads to non-convex optimization which is np-hard and to be avoided if possible
+* L<sub>1</sub> Regularization is convex and gets weights to exactly 0
+
+#### L<sub>1</sub> versus L<sub>2</sub>
+
+* L<sub>2</sub> penalizes _weight_<sup>2</sup> and has a derivative of _2 * weight_
+* L<sub>1</sub> penalizes |_weight_| and has a derivative of _k_ (independent of weight)
+* L<sub>2</sub> removes a percentage of weight while L1 removes a contant amount of weight each time
+
+## Neural Networks
+
+* Neural nets are good for very non-linear problems (i.e. feature cross products don't work well)
+* Models should learn the non-linearities without us having to specify them
+* Adding hidden layers doesn't produce non-linearity
+* We need to add a non-linear transforms aka **activation functions**
+* **Relu** (Rectified Linear Unit) is a simple non-linear function: _F(x) = max(0,x)_
+  * **Sigmoid** (e.g. _F(x) = 1 / (1 + e<sup>-x</sup>)_ ) and **_tanh_** are other non-linear functions that are common
+* *Gradient Descent* is replaced by **Back Propogation** in neural networks
+* another way to say it: _nonlinear_ means you can't predict a label with a model of the form _b + w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub>_
+
+### Standard components of a neural network
+* set of layers of nodes (neurons)
+* set of weights representing connection between each nn layer
+* set of biases for each node
+* an activation function for each layer
+
+## Best Practices for Training NNs
+
+* **Vanishing Gradients**: gradients for lower layers can become small and cause a lot of calculation that doesn't affect the model.  Getting gradients to zero using a Relu activation fuction is one method of preventing them
+* **Exploding Gradients**: opposite of vanishing gradients, where gradients become large and don't converge.  Batch normalization and lowerering the learning rate can prevent exploding gradients
+* **Dead Relu Units**: Once Relu falls below 0, it never comes back.  Lowering the learning rate can help keep Relu from dying prematurely
+* **Dropout Regularization** is removing a node with probability _P_ during a gradient step to determine if it's presense is having a negative affect on the model
+
+## Multi-class neural networks
+* From exercise on MNIST images to recognize handwritten digits
+* A nn with 256 nodes then a dropout of .4 produced 98% accuracy on the task
+
+## Embeddings
+
+* Embeddings are a way to represent data as a vector in many dimensions
+* Embeddings are motivated from collaborative filtering where we want to use user behavior to determine similarity and clustering for recommendations
+* **categorical input data** refers to input features the represent one or more discrete items from a finite set of choices (i.e. movies watched from all movies, music track played from all tracks)
