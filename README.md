@@ -40,3 +40,6 @@ Heres' what we're going to use
 * create virtual environment
 * create folder structure /tests /posts /drafts
 
+
+# Building the site while editing in Vim
+`autocmd BufWritePost * :silent!make build`
