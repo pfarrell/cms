@@ -6,33 +6,52 @@ image: null
 kebab: notes-from-google-machine-learning-crash-course
 projectLink: null
 summary: Write a summary
-title: Notes from Google Machine Learning Crash Course
+title: Notes from Google Machine Learning Courses
 ---
 
 These are notes from [Google's machine learning crash course](https://developers.google.com/machine-learning/crash-course)
 
 
-## Intro
+# Intro
+
+### Common types of Machine Learning
+* Supervised Learning: data set contains labelled examples of predictions
+    * Regression: predicting a number value for input
+    * Classification: Categorizing based on input
+* Unsupervised learning
+    * Predicts based on training data patterns without labelled examples
+    * Clustering acts like classification without having categories defined by the user which are added after bucketing
+* Reinforcement learning
+    * Models make predictions by getting rewards and penalties based on decisions
+    * e.g. AlphaGo to learn go or training robots to perform tasks
+* Generative AI
+    * Create output based on user input
+    * text, images, audio, and video are all types of output
+    * e.g. text-to-text, text-to-image, text-to-video, text-to-code, text-to-speech, image+text-to-image
+
+
 * Steps in developing a model
-  * Data acquisision
-  * Data cleaning/understanding
-  * Choose a model
-  * Feature Engineering
-  * Training
+    * Data acquisision
+    * Data cleaning/understanding
+    * Choose a model
+    * Feature Engineering
+    * Training
     * Calculate Loss (RMSE
     * Learning Rate
     * Regularization (L<sub>1</sub>, L<sub>2</sub>)
     * Visualization (matplotlib)
 
+# Machine Learning Crash Course
+
 ## Logistic Regression
-  * Linear Regression can produce models that produce unrealistic results when 
-  * Logistic Regression produces probabilities that are calibrated
-  * Uses Sigmoids (i.e. tanh) 
-  * Regulariztion helps penalizing large weights and allowing early stopping
-  * Linear logistic regression is efficient and scales to large datasets
+    * Linear Regression can produce models that produce unrealistic results when 
+    * Logistic Regression produces probabilities that are calibrated
+    * Uses Sigmoids (i.e. tanh) 
+    * Regulariztion helps penalizing large weights and allowing early stopping
+    * Linear logistic regression is efficient and scales to large datasets
     * nonlineararity can be expressed using feature cross products
-  * Loss function for linear regression is squared loss, Loss function for logistic regression is Log loss
-  * Logistic regression without regularization would drive loss to 0 in higher dimensions, L<sub>2</sub> regularization **prevents** over fitting and reduces model complexity*
+    * Loss function for linear regression is squared loss, Loss function for logistic regression is Log loss
+    * Logistic regression without regularization would drive loss to 0 in higher dimensions, L<sub>2</sub> regularization **prevents** over fitting and reduces model complexity*
 
 ## Classification
 * Classification can be based on logistic regression
@@ -100,7 +119,7 @@ These are notes from [Google's machine learning crash course](https://developers
 * Adding hidden layers doesn't produce non-linearity
 * We need to add a non-linear transforms aka **activation functions**
 * **Relu** (Rectified Linear Unit) is a simple non-linear function: _F(x) = max(0,x)_
-  * **Sigmoid** (e.g. _F(x) = 1 / (1 + e<sup>-x</sup>)_ ) and **_tanh_** are other non-linear functions that are common
+    * **Sigmoid** (e.g. _F(x) = 1 / (1 + e<sup>-x</sup>)_ ) and **_tanh_** are other non-linear functions that are common
 * *Gradient Descent* is replaced by **Back Propogation** in neural networks
 * another way to say it: _nonlinear_ means you can't predict a label with a model of the form _b + w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub>_
 
@@ -127,22 +146,22 @@ These are notes from [Google's machine learning crash course](https://developers
 * **categorical input data** refers to input features the represent one or more discrete items from a finite set of choices (i.e. movies watched from all movies, music track played from all tracks)
 * We use sparse tensors to represent the wide range of data available (e.g. list of ids of movies watched rather than a one-hot encoding of 500k movies)
 * huge input vectors create challenges
-  * very huge number of weights in the nn (i.e. M words and N nodes results in _M x N_ weights
-  * results in large amount of data and computation
+    * very huge number of weights in the nn (i.e. M words and N nodes results in _M x N_ weights
+    * results in large amount of data and computation
 * **embeddings** are the solution to sparse data translating large sparse vectors into lower-dimensional space while preserving semantic relationships
 * useful embeddings are on the order of hundreds of dimensions (likely several orders of magnitude smaller than the source data)
 
 ## ML Engineering
 * Full range of an ML application/system includes
-  * Data collection
-  * Data Verification
-  * Machine Resource Management
-  * Analysis Tooling
-  * Feature Extraction
-  * Process Management Tools
-  * Configuration
-  * Monitoring
-  * Serving Infrastructure
+    * Data collection
+    * Data Verification
+    * Machine Resource Management
+    * Analysis Tooling
+    * Feature Extraction
+    * Process Management Tools
+    * Configuration
+    * Monitoring
+    * Serving Infrastructure
 ### Static versus Dynamic training
 
 * A static model is trained offline, deployed to production, and monitored
@@ -165,16 +184,78 @@ These are notes from [Google's machine learning crash course](https://developers
 ### Fairness
 * Wikiepedia [lists over 100 types of cognitive bias](https://wikipedia.org/wiki/List_of_cognitive_biases)
 * Common Biases in data
-  * Reporting Bias: actual frequency of events in real world not reflected in the data because they "go without saying" or are prototypical
-  * Selection Bias: when a dataset's examples are chosen in a way not reflecting the real world
-  * Overgeneralization
-  * Out-group homogeneity bias: in-groups are described in more detail than out-groups which are stereotyped in data collection
-  * Confirmation Bias
-  * Automation Bias: favoring results generated by automated systems
-  * Unconscious Bias: allowing one's mental models to affect data collection/interpreation/inclusion
-
+    * Reporting Bias: actual frequency of events in real world not reflected in the data because they "go without saying" or are prototypical
+    * Selection Bias: when a dataset's examples are chosen in a way not reflecting the real world
+    * Overgeneralization
+    * Out-group homogeneity bias: in-groups are described in more detail than out-groups which are stereotyped in data collection
+    * Confirmation Bias
+    * Automation Bias: favoring results generated by automated systems
+    * Unconscious Bias: allowing one's mental models to affect data collection/interpreation/inclusion
 * Evaluating Bias
-  * missing features have responses in a dataset.  E.g. in the california housing dataset, 82% of population, households, and median_income feautres didn't have data
-  * unexpected feature values can indicate data collection issues or other biases
-  * Data skew e.g. california housing dataset included only northern california data, would be unacceptable to apply models generated from it to SoCal
-  * Precision and Recall should be calculated for subgroups within a model's output, not just for entire dataset. e.g. example of cancer screening that was very effective for female and not effective for males, but when taken together looked pretty good
+    * missing features have responses in a dataset.  E.g. in the california housing dataset, 82% of population, households, and median_income feautres didn't have data
+    * unexpected feature values can indicate data collection issues or other biases
+    * Data skew e.g. california housing dataset included only northern california data, would be unacceptable to apply models generated from it to SoCal
+    * Precision and Recall should be calculated for subgroups within a model's output, not just for entire dataset. e.g. example of cancer screening that was very effective for female and not effective for males, but when taken together looked pretty good
+* FacetsOverview and FacetsDive are two python interactive data tools that can help visualize data
+
+## ML Systems in the world
+
+* Label leakage can happen when the dataset you're building on is a proxy for what you're trying to predict.  E.g. cancer prediction model was excellent at predicting cancer but was not effective in the real world because the hospital data was not random in the dataset but included hospital name (which was a proxy for diagnoses that happen at that hospital)
+* When creating splits of data for training, test, validation, you must understand the data so you don't create false confidence by having linkages between the training and test data
+
+### ML guidelines
+
+* Keep the first model simple
+* Focus on ensuring data pipeline correctness
+* Use simple observable metric for training and evaluation
+* Own and monitor your input features
+* Treat you model configurtion as code: review it, check it into source control
+* Write down the results of all experiments including failures
+
+# Problem Framing
+
+* Begin ML applications by determining if a heuristic approach is optimized and what accuaracy and quality it can produce
+    * Is ML capable fo producing a significant boost in accuracy warranting the cost of maintaining it?
+* Data Availability is important.  Is It:
+    * Abundant
+    * Consistent and Reliable
+    * Trusted
+    * Available
+    * Correct
+    * Representative
+* Finding the features in a dataset with predictive power or correlation can be automated with algorithms like
+    * [Pearson Correlation](https://wikipedia.org/wiki/Pearson_correlation_coefficient)
+    * [Adjusted mutual information (AMI)](https://wikipedia.org/wiki/Adjusted_mutual_information)
+    * [Shapley value](https://wikipedia.org/wiki/Shapley_value#In_machine_learning)
+* ML Problems should
+    * define ideal outcomes for the model
+    * identity model's output
+    * define success metrics
+* When action's change significantly because of small differences in a regression model's predictions, you should consider implementing a classification model instead.
+* Generative models are more often customized instead of trained directly
+    * customization types: Distillation, fine-tuning, prompt engineering
+
+# Data Prep
+## Sampling and Splitting
+### Unbalanced datasets
+* Imbalanced datasets can lead to poor training.  e.g. a fraud detection dataset that only has 1 fraud transaction per 200 legit transactions
+    * in general if a data set is imbalanced 20-40%: mild, 1-20%: moderate, <1%: extreme
+* **Majority Class**: The data that has over representation.  **Minority Class**: The under-represented data
+* **Downsampling**: training on a disproportionately low subset of the majority class 
+* **Upweighting**: adding an example weight to the downsampled class equal to the factor by which you downsampled.  *Example Weight* is distinct from training weights. 
+    * If we dataset was .5% minority, 99.5% majority and we downsampled by a factor of 10 to make the rates be 5% minority, 95% majority, then we would need to remember the factor of 10 when calculating loss.  That is upweighting
+    * This leads to faster convergence, lower disk space usage, and ensures calibration
+### Data splitting
+* When creating training, validation, and test datasets, randomly selecting rows is often adquate, but there are qualities of a dataset which might make this not work
+* Some datasets are naturally clustered (e.g. by time or topic)
+### Data Transforms
+* Normalization
+    * scaling to a range: maps a range of values to 0.0..1 or -1.0 - 1.0.  Good choice when data's max/min are known and data is spread uniformly across a range e.g. age<br> _x<sup>'</sup> = (x - x<sub>min</sub>)/(x<sub>max</sub> - x<sub>min</sub>)_
+    * clipping: clamping data to a max/min value
+    * log scaling: using a log of values to compress large ranges into smaller ones: _x<sup>'</sup> = log(x)_
+    * z-score: shows the number of standard deviations away from mean. useful when there are a few outliers: _x<sup>'</sup> = (x - &mu;)/&sigma;_
+* Bucketing: transforming continuous data into categorical
+    * We can create buckets that have equal ranges: i.e. latitude degree (31,32,33,34,...)
+    * **Quantile Bucketing**: creating buckets with equal numbers of data points (each bucket has 15 data points with variable ranges) 
+# Recommendation Systems
+
