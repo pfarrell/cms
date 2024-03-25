@@ -1,10 +1,11 @@
 ---
 date: '2022-12-08'
 id: 1670547530
-image: img/easy_to_be_hard.jpg
-kebab: easy-to-be-hard
+image: img/rocks.jpg
+kebab: it-shouldnt-be-too-hard
 summary: Sometimes things that seem hard are easy and vice versa.  Thoughts on the It Shouldn't Be Too Hard Fallacy
-title: Easy To Be Hard
+title: It Can't Be That Hard
+  
 ---
 I have a theory that product managers often inversely estimate the difficulty of feature requests.  I call it the "It Shouldn't Be Too Hard" fallacy.  
 
