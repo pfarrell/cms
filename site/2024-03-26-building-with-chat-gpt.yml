@@ -1,0 +1,76 @@
+---
+date: '2024-03-26'
+headerImage: null
+id: 171
+image: img/jobsearch_demo_1.gif
+kebab: building-with-chatgpt
+projectLink: https://github.com/pfarrell/jobsearch
+summary: Building a new application with prompts
+title: Building With ChatGPT
+---
+I won't go into a rant on the implications of this yet, but as I was working on my current job search, where I was keeping track of some data in spreadsheets, it occurred to me that I would prefer working with something a little more humane than copy pasting from terminal, spreadsheets, and webpages.
+
+I decided to use see how far I could get programming a new application just be describing it.  This is a purely anecdotal experiment, there is no control group, even.
+
+### The Application
+I started by thinking about my process as a sales funnel
+
+For each website in my list, are the following satisfied?
+
+![job funnel](img/jobfunnel.svg)
+
+I was just deleting entries from a spreadsheet when it occurred to me that this was valuable info that I was losing.  What I needed was a database driven application that would mark decisions as events instead of just deleting entries.  
+                                                                              
+I didn't want to just build a webapp, though, because I wanted to automate as much of my work as possible.
+
+I wanted:
+* a local application 
+* backed by a database
+* written in Python
+* that could drive a web browser
+
+Application development is iterative, so I didn't try to start with a single prompt.  Here are key prompts I used.
+
+<div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; padding: 1em; margin-bottom: 1em;">
+In Python, create a wxWidgit form that has has a scrollable display for showing urls from the websites table, a button to use selenium to launch a browser using the currently selected url
+</div>
+
+<div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; padding: 1em; margin-bottom: 1em;">
+make it so that when a selection is changed in the listbox, it navigates to that page in the browser launched by the launch button and so that when the application closes, it closes the selenium browser
+</div>
+       
+<div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; margin-bottom: 1em; padding: 1em;">
+i want to add some keyboard shortcuts to my form.  
+
+<p>
+when I press ctrl-n I want that to be like I clicked the next url in the listbox from what is currently selected. update the form so there is a keyboard shortcut to the "i" which will alter the droplist to the ignore value.  Also add a keyboard shortcut so the key "s" will do change the droplist to the save value.  Add a menubar to the form with a File entry which has a single entry nested in it called "Import Urls".  
+</p>
+
+When this menu command is clicked, open up a dialog to browse for a file.  When the file is selected, import each line of the file creating a new websites entry for it.  If the  entry starts with a / then also add a visits record for that website entry and set the date to the current time.  Add a menubar to the form with a File entry which has a single entry nested in it called "Import Urls".  When this menu command is clicked, open up a dialog to browse for a file.  When the file is selected, import each line of the file creating a new websites entry for it.  If the  entry starts with a / then also add a visits record for that website entry and set the date to the current time.  Make it so I can import text files that don't have a file extension
+</div>
+
+<div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; padding: 1em; margin-bottom: 1em;">
+When the browser is loading in selenium, the ui freezes.  I want to fix that
+</div>
+
+and this was my favorite one, adding a keyboard shortcut to my app to scroll the browser.  I wanted this because often websites had job page links at the bottom and I would have to mouse scroll.
+
+<div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; padding: 1em; margin-bottom: 1em;">
+I want to modify it so that the keyboard shortcut ctrl-j will cause selenium to scroll the browser window to the bottom
+</div>
+
+### Takeaways
+* In less than a hour, I had an application running that 
+* I don't think this would have come together so quickly if I wasn't a programmer
+* Often, I had to remind ChatGpt what my code was.  I did this by prefixing my messages with "This is my current codebase {codebase} {instructions to alter}
+* Storing everything in one file made it easier to communicate with ChatGPT
+* I had to do a lot of copy pasting.  Even when I told GPT to output the enter codebase instead of diffs, it ignored that suggestion.
+* Many times, GPT ignored the classes in my code and assumed functions were being added at the top level of scope
+
+As we keep saying, this technology will only get better and better.  I'll keep developing with this and I guess the role we have will transition to a producer instead of an author.  
+
+||Lines|% of lines|
+|--|--|--|
+|**ChatGpt**|510|95%|
+|**PatOnlyMe**|25|5%|
+|**Total**|535|100%|
