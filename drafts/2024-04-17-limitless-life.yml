@@ -2,12 +2,11 @@
 date: '2024-04-17'
 headerImage: null
 id: 1713373355
-image: update me
+image: img/infinite_life_board.png
 kebab: limitless-life
-liveLink: null
-projectLink: null
-summary: Write a summary
+projectLink: https://github.com/pfarrell/life
+summary: Conway's Game of Life Without Borders
 title: Limitless Life
 ---
-
-None
+<img src="img/infinite_life_board.png" style="float:right" alt="picture of Conway's game of life">
+This is the second time I've implemented John Conway's Game of Life in canvas.  The [first version](https://patf.net/life.html)

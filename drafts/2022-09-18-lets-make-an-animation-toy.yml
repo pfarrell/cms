@@ -5,7 +5,7 @@ kebab: lets-make-an-animation-toy
 title: Let's Make an Animation Toy
 summary: Limited demo of using Javascript to write an IDE in the browser
 image: img/mt_sshot_2.gif
-projectLink: toy_ide.html 
+liveLink: toy_ide.html 
 ---
 There's so much power sitting in our web browsers.  Let's have some fun.
 

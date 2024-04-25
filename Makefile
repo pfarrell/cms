@@ -21,7 +21,7 @@ clean:
 black:
 	@PYTHONPATH=cms black cms bin
 
-open: build
+open:
 	xdg-open dist/index.html
 	
 

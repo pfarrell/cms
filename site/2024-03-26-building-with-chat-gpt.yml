@@ -4,7 +4,6 @@ headerImage: null
 id: 171
 image: img/jobsearch_demo_1.gif
 kebab: building-with-chatgpt
-projectLink: https://github.com/pfarrell/jobsearch
 summary: Building a new application with prompts
 title: Building With ChatGPT
 ---
@@ -58,6 +57,18 @@ and this was my favorite one, adding a keyboard shortcut to my app to scroll the
 <div style="background-image: linear-gradient(rgb(237, 237, 237) 0%, rgb(246, 246, 246) 0%, rgb(237, 237, 237) 100%); background-repeat: repeat; background-size: auto; border-bottom-left-radius: 7px; border-bottom-right-radius: 7px; border-top-left-radius: 7px; border-top-right-radius: 7px; padding: 1em; margin-bottom: 1em;">
 I want to modify it so that the keyboard shortcut ctrl-j will cause selenium to scroll the browser window to the bottom
 </div>
+
+The app I eventually produced included support for: 
+
+* Storing data in a database
+* Remote Browsing via Selenium
+* Capturing decisions and loading behavior
+* Retaining urls for job pages for a domain
+* Lots of keyboard shortcuts to prevent mouse use
+* Loading website lists into the database
+* Tracking jobs I've applied to
+
+![Animation of the app](img/jobsearch_demo_1.gif)
 
 ### Takeaways
 * In less than a hour, I had an application running that 

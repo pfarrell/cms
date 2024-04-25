@@ -2,12 +2,78 @@
 date: '2022-11-29'
 id: 1669750426
 image: img/live_coding_demo.gif
-kebab: replicating-brett-victors-live-coder
-projectLink: live_coding.html
-summary: Write a summary
-title: Replicating Brett Victor's Live Coder
+kebab: brett-victors-live-coder
+liveLink: live_coding.html
+summary: Notes on building a live coding IDE in JavaScript
+title: Brett Victor's Live Coder
 ---
-"Inventing on Priciple" is one of the great, evergreen presentations.  It's an inspiring talk about 
 <div style="text-align: center">
 <iframe style="maring: auto" width="560" height="315" src="https://www.youtube.com/embed/PUv66718DII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+
+"Inventing on Priciple" is an evergreen presentation. It was astonishing in 2012 and it remains relevant today.  Even if the live coding Brett presents was something implemented in every software workflow (it isn't), the demos aren't the point of the talk (as Brett hits around 35 minutes in), it's creating an immediate connection to what you're working on.  Especially in backend development, the push of dev-ops concerns into the creator's workflow limits how quickly we can build.  The goal of microservices was to limit the inter service dependencies, but except in giant development organizations, this leads to engineers having to have bigger and beefier laptops to run all the services.  Same goes for kubernetes.  Architectures and frameworks are important, but we must preserve the connection between author and work.
+
+In order to get a flavor of Brett's talk, I reimplemented portions of his live coder and found the original source he loaded to build the tree.
+
+### Live Coding Editor
+
+A core realization Brett shows us is we program computers as a relic from earlier ages. From punch card programming, we have
+a true disconnect. Where the program must be entirely realized in the mind of the programmer, encoded into a series of 
+punch cards, loaded into a computer, evaluated, and only then can the programmer examine the output. From there, we can 
+think of how the development of languages proceeded and is still influenced by this and pervades our
+thinking.  This is a core concept Bret was led to discover by his principal. We consider
+the [Read-Eval-Print-Loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) to be some sort of ultimate goal.
+Indeed, this kind of tooling can reduce the time between creation and feedback, but Bret
+goes further and shows how we can reimagine different ways of programming if we start
+and looking at how our tools influence the creative process.
+
+As programmers, we are bound by the tools and languages we use. Many of the
+decisions around the design of these were made in different computing eras. Earlier eras
+dealt with resource constraints and designed their systems around these. So many of these
+constraints affected the way we created. Disk space, network bandwidth, CPU, GPU, caching,
+multiple cores, high resoultion display. All have fundamentally changed over the past
+decades.
+
+
+That being said, those demos had such a high <gasp> factor and I can't help but give it
+a shot at figuring out how to duplicate what he did in those tools.
+
+### Part 1: the Tree Demo
+<img src="img/bret_victor_tree_demo.jpg" width=400 align=right />
+
+This demo shows off an IDE which has an immediate connection to what is being rendered.
+Bret demonstrates creating a scene in a JavaScript canvas.
+
+The essential aspect of this code is to have the render of the code happen as the code
+is being written.
+
+#### Think of compilation as an animation loop
+
+With JavaScript, we are dealing with interpreted code.  We are still constrained by the
+Code-Reload-Examine loop.  In order to remove the "Reload" aspect of this, we should think
+of compilation as a coninuous act, not as an event we trigger. This is where we can be
+wasteful with CPU in order to realize a new way to interaction. Being able to make this
+core element happen, we can reimagine an animation loop running which constantly re-renders
+our code. Part of Bret's demo lead to this way of thinking very easily.
+
+#### Better Yet, Think of compilation as a very frequent event
+
+The problem with continuous compilation is unintended consequences while typing.  Imagine executing
+a SQL statement on every key press.  
+
+>  Let's see. <typing>  
+>   `DELETE FROM foo WHERE...`.  
+>  Wait why does't _foo_ have any data?
+
+In case it's not obvious, running SQL on every key press would be a disaster.  `DELETE FROM foo` is valid
+but disatrous and not the author's intention.
+
+### I Didn't Miss The Point
+
+Bret's ultimate goal was not to demo
+his software, it was to show how the principal Bret had created for himself, "creators
+need an immediate connection to what they are creating" led him to reimagine
+interactions programmers have with computers. The ultimate goal of Bret's demos were
+not to show off the program used in the demo, but to demonstrate how his principal led
+him to create that tool. I think that's why he (as far as I know) hasn't released his
+tools. They aren't the point.  They're just entralling demos.

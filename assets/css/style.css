@@ -42,9 +42,7 @@ canvas {
 }
 
 .banner {
-   margin-bottom:1em;
    background-color: white;
-   padding-bottom: 1em;
    border-radius: 10px 10px 0px 0px;
    position:relative;
    text-align:centeree;
@@ -59,9 +57,9 @@ canvas {
  }
 
 
-.banner > h1 {
+.banner > h1, h2 {
   width: 100%;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   margin-top: 0;
 }
 

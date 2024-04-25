@@ -50,5 +50,5 @@ Firebase provides some client libraries that can capture changes as near real ti
 
 #### Publishing the dataset
 
-Still a work in progress.  For now (while github allows it), a csv export of item level data is available at [hn-data](https://github.com/pfarrell/hn-data)
+Still a work in progress.  For now (while github allows it), a csv exports of item level data is available at [hn-data](https://patf.com/hn-data)
 
