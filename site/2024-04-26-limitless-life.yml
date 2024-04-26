@@ -1,12 +1,59 @@
 ---
-date: '2024-04-17'
+date: '2024-04-26'
 headerImage: null
 id: 1713373355
 image: img/infinite_life_board.png
 kebab: limitless-life
-projectLink: https://github.com/pfarrell/life
 summary: Conway's Game of Life Without Borders
 title: Limitless Life
+projectLink: https://github.com/pfarrell/life
 ---
 <img src="img/infinite_life_board.png" style="float:right" alt="picture of Conway's game of life">
-This is the second time I've implemented John Conway's Game of Life in canvas.  The [first version](https://patf.net/life.html)
+This is the second time I've implemented John Conway's Game of Life in canvas.  The [first version](https://patf.net/life.html) works well but was implemented as a pretty naive first pass.  With this [second version](https://github.com/pfarrell/life), I wanted to explore a few things
+
+* making the game board stored much more sparsely
+* pushing the browser to handling much more data
+* moving rendering remotely allowing for multiplayer participation
+
+As of April 20, I've achieved the first bullet point and am looking at the [life wiki](https://conwaylife.com/wiki/Main_Page) for more inspiration.
+
+### Sparse Representation
+An easy, but naive way to implement the game of life is to use an array or array of arrays to store the game board.  For example, a 4x4 board could be stored as
+```
+[
+  [0, 0, 0, 0],
+  [0, 1, 0, 0],
+  [0, 1, 1, 0],
+  [0, 0, 0, 0]
+]
+```
+The matrix locations map on to cells on a grid, so `array[0][0]` represents the top left most cell in a grid.
+
+In order to calculate the next frame, the following pseudocode would suffice
+
+```
+for each row in array
+  for each cell in row
+    determine life in this cell based on rules
+```
+
+This leads to an _O(n)_ complexity as we visit every cell to calculate the next game state.  What's nice here is that we have an _O(1)_ lookup time for neighbors and the number of neighbors to be examined is fixed, so that complexity disappears behing the loops over the game state.  The arrays are consuming a lot of unused memory.  Depending on the language, storing nulls instead of `0` may help, but we can do better.
+
+#### The Game Belongs to the Living
+
+Imagine our game board is unbounded.  There is a center (0, 0) cell, but instead of having "walls", the game board stretches on to infinity in each of the four directions in 2 dimensions.  We can preserve a worst case runtime for calculating next game state with _O(n)_ complexity, but the worst case will be when every cell is populated.  We shouldn't expect this to happen often.  In general, the complexity will be _O(m)_ where _m_ is the number of live cells plus 8 neighbors which will also need to be checked for life.
+
+Alter our grid store to a dictionary of sets.  Access to a key in the dictionary is _O(log n)_ and checking if a key is populated in a row is likewise _O(log n)_.  To calculate the next game state, create a temporary set of tuples of cells to check for new life.  This set includes all currently populated cells and each of the neighbors of those cells.  Our pseudocode now looks like this
+
+```
+for each row in array
+  for each cell in row
+    for each of the 8 neighbors of cell and the cell itself
+      determine life in this cell based on rules
+```
+
+### Next Steps
+
+There are noticeable improvements (as yet unmeasured) in render times for this board as the render complexity is bounded by the number of living cells instead of constant for the board size.  We're still doing rendering on the main CPU, though.  In some circumstances, we can use the GPU instead which might give us an incredible increase in performance.
+
+_To Be Continued... (Pat, April 26, 2024)_
