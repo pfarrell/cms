@@ -10,7 +10,7 @@ title: Assembling the Hacker News dataset
 ---
 Feb. 7, 2023 was the 15th anniversary of the creation of my [username](https://news.ycombinator.com/user?id=pfarrell) on Hacker News.  Except for a three year hiatus, it's been a site I visit daily to keep up with new projects, learn about other areas of tech, and learn more about portions of our world.  Hacker News was launched in 2007 and contains a trove of knowledge, hot takes, and history. 
 
-These notes are my personal observations and since I'm not affiliated with YCombinator, Microsoft, or Google, I'm not warranting this the most efficient way, but it works for me and my purposes.
+These notes are my personal observations on assembling a dataset for this content.  Since I'm not affiliated with YCombinator, Microsoft, or Google, I'm not warranting this the most efficient way, but it works for me and my purposes.
 
 We _could_ scrape the actual website, but with close to 39.8 records (as of March 2024), at 10 records per second, we're looking at 45 days to get the full data set.
 
@@ -50,5 +50,8 @@ Firebase provides some client libraries that can capture changes as near real ti
 
 #### Publishing the dataset
 
-Still a work in progress.  For now (while github allows it), a csv exports of item level data is available at [hn-data](https://patf.com/hn-data)
+I had a great idea to publish the files as a git repository on github, but this doesn't seem feasible.  Even compressed, the dataset is around 5 gigs of data.  This is outside the bounds of what a git repository should handle, likewise, I expect to automatically publish new data every day, so each commit will add a bunch of object data to the repository so it can constuct diffs of commits.  I _could_ use git-lfs, but then I have to host the files somewhere, other users will have to use git-lfs, and they won't be able to download portions of the dataset... it would be all or nothing.  Instead of going through that much trouble, I'll host a webpage with the latest download links on both my website and on github, store the files in my home setup, and call it a day.
 
+Find the data at the [hn-chrono github](https://github.com/pfarrell/hn-chrono) or at [patf.com/hn-data](https://patf.com/hn-data/).
+
+If this ever gets some attention, we change this whole process to a torrent.

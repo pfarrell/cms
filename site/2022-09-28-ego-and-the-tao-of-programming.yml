@@ -8,7 +8,7 @@ image: img/yin_yang.png
 ---
 One of the worst production issues I've caused resulted in one of the best interactions I've had with a manager.
 
-It was tax season and I was working for the state website and was at the most dangerous time in software person's career, about 5 years experience.  Confident, but still untested.  Today was the day that would bite me.  
+It was tax season in 2005 and I was working for the state website and was at the most dangerous time in software person's career, about 5 years experience.  Confident, but still untested.  Today was the day that would bite me.  
 
 I was a subject matter expert on the billing system and had worked supporting and extending it for several years.  Due to regulatory requirements, we had to add some columns for PCI compliance.  We had already deployed this change in other offices and hadn't had any issues, but that wasn't during tax time.  Our traffic was substantially higher and, for me at the time, that was an unknown unknown.
 
@@ -20,8 +20,6 @@ Remember it's tax time.  My little escapade has caused citizens from being able 
 
 ![statue showing a facepalm](img/cain_facepalm.jpg){style=margin:auto;display:block;}
 
-As we were assessing the damage, I'm nearly in tears at my desk.  My manager calls me into his office.  I'm assuming I'm getting fired on the spot.  He gives me some of the best advice I've turned over in my head for years.  "I want you to stop using the word *I* when you're talking about code.  You made a mistake and it happens to all of us.  It's huge problem if it happens again, but this can happen and you need to learn to let it go."
-
-He was spot on.  I definitely had my ego wrapped up in my work.  I had to find a balance between wanting to deliver, wanting to grow, wanting to be the best, and realizing that I would make mistakes.  It was a new feeling to me that a few key presses could cause so much damage.
+As we were assessing the damage, I'm nearly in tears at my desk.  My manager calls me into his office.  I'm assuming I'm getting fired on the spot.  He gives me some of the best advice I've turned over in my head for years.  "You made a mistake and you have caused a huge problem, but you learned something today.  From now on, I want you to stop equating your work with your self.  I want you to stop using the word *I* when you're talking about your code.  You made a mistake and it happens to all of us.  It's huge problem if it happens again, but this can happen and you need to learn to let it go."
 
 It's not like I didn't get punished.  I had to watch all my co-workers work late calling everyone who'd had issues during our payment system outage.
