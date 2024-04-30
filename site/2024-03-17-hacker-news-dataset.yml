@@ -4,7 +4,7 @@ headerImage: null
 id: 1673538337
 image: img/hacker-news.png
 kebab: hacker-news-dataset
-projectLink: https://github.com/pfarrell/hn-chrono
+projectLink: https://patf.com/hn-data/
 summary: Notes on capturing Hacker News
 title: Assembling the Hacker News dataset
 ---
@@ -50,7 +50,19 @@ Firebase provides some client libraries that can capture changes as near real ti
 
 #### Publishing the dataset
 
-I had a great idea to publish the files as a git repository on github, but this doesn't seem feasible.  Even compressed, the dataset is around 5 gigs of data.  This is outside the bounds of what a git repository should handle, likewise, I expect to automatically publish new data every day, so each commit will add a bunch of object data to the repository so it can constuct diffs of commits.  I _could_ use git-lfs, but then I have to host the files somewhere, other users will have to use git-lfs, and they won't be able to download portions of the dataset... it would be all or nothing.  Instead of going through that much trouble, I'll host a webpage with the latest download links on both my website and on github, store the files in my home setup, and call it a day.
+I had an idea to publish the files to a git repository on github, but this isn't feasible.  
+
+* The compressed size of all the files are around 5 Gb
+* File per day or per year seem wrong... file per month seems right
+* Git stores changes to files (how could it not?), so 5Gb is really a lower bound on how big the repo will get
+    * We publish changes every day, so those are going to be tracked as changes and increase the size of the .git directory
+* I _could_ use git-lfs, but then we still have to host the files somewhere and other users will have to install the command-line extension to access the files
+* Users won't be able to download portions of the dataset... it would be all or nothing.  
+
+Git/Github is just a bad fit.
+
+#####Keep it simple
+The end design is to publish the data to a file store and then populate an [information page](https://patf.com/hn-data/index.html) to hold metadata about the downloads.
 
 Find the links to the data at the [hn-chrono github](https://github.com/pfarrell/hn-chrono) or at [patf.com/hn-data](https://patf.com/hn-data/).
 

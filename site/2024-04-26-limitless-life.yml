@@ -15,7 +15,7 @@ This is the second time I've implemented John Conway's Game of Life in canvas.  
 * pushing the browser to handling much more data
 * moving rendering remotely allowing for multiplayer participation
 
-As of April 20, I've achieved the first bullet point and am looking at the [life wiki](https://conwaylife.com/wiki/Main_Page) for more inspiration.
+For this part, I've achieved the first bullet point and am looking at the [life wiki](https://conwaylife.com/wiki/Main_Page) for more inspiration.
 
 ### Sparse Representation
 An easy, but naive way to implement the game of life is to use an array or array of arrays to store the game board.  For example, a 4x4 board could be stored as
@@ -51,6 +51,10 @@ for each row in array
     for each of the 8 neighbors of cell and the cell itself
       determine life in this cell based on rules
 ```
+
+#### Navigating an Infinite Grid
+How do we render an unbounded grid?  We must establish a separation of concerns about 
+![world view for life](img/gol_board.png)
 
 ### Next Steps
 

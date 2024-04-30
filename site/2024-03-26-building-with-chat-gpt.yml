@@ -58,6 +58,7 @@ and this was my favorite one, adding a keyboard shortcut to my app to scroll the
 I want to modify it so that the keyboard shortcut ctrl-j will cause selenium to scroll the browser window to the bottom
 </div>
 
+
 The app I eventually produced included support for: 
 
 * Storing data in a database
