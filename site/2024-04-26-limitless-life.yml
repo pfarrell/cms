@@ -53,7 +53,16 @@ for each row in array
 ```
 
 #### Navigating an Infinite Grid
-How do we render an unbounded grid?  We must establish a separation of concerns about 
+How do we render an unbounded grid?  We must establish a classic MVC style separation of concerns.
+
+There are three main components here
+
+* Cell: An single cell which contains some about of information
+* View: The current portions of the world's cells which are being rendered
+* World: The infinite grid which mostly exists virtually an which advances steps in a game
+
+The advancements we make here (from version 1) is to separate the world from what is being rendered, this allows the view to scroll and zoom during smoothly without affecting the calculation of the frame.  See [this portion of code](https://github.com/pfarrell/life/blob/main/script.js#L118-L135)
+
 ![world view for life](img/gol_board.png)
 
 ### Next Steps
