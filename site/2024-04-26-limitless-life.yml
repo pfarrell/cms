@@ -69,4 +69,4 @@ The advancements we make here (from version 1) is to separate the world from wha
 
 There are noticeable improvements (as yet unmeasured) in render times for this board as the render complexity is bounded by the number of living cells instead of constant for the board size.  We're still doing rendering on the main CPU, though.  In some circumstances, we can use the GPU instead which might give us an incredible increase in performance.
 
-_To Be Continued... (Pat, April 26, 2024)_
+_To Be Continued... (Pat, May 2, 2024)_
