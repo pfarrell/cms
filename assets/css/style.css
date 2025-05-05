@@ -101,6 +101,11 @@ a {
   cursor:pointer;
 }
 
+.card-link {
+  text-decoration:none;
+  cursor:pointer;
+}
+
 li {
   margin-bottom: 0 1em 1em 1em;
 }
@@ -145,7 +150,7 @@ p {
   align-items: stretch;
 }
 
-.grid > article {
+article {
   background-color: #f2f2f22;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
@@ -161,6 +166,7 @@ p {
 .summary {
   padding-left: 1em;
   padding-right: 1em;
+  color: #000000;
 }
 
 .text h3 {
@@ -169,13 +175,13 @@ p {
   text-align: center;
 }
 
-.grid > article img {
+article img {
   max-width: 100%;
   max-height: 160px;
   vertical-align: middle;
 }
 
-.grid > article .links {
+article .links {
   text-align: center;
 }
 

@@ -4,24 +4,17 @@
   </div>
   <main class="grid">
   {% for post in posts %}
-  <article class="">
-    <img src="{{ post.image }}" />
-    <div class="text">
-      <h3>{{ post.title }}</h3>
-      <p class="summary">
-        {{ post.summary }}
-      </p>
-      <div class="links">
-        <p><a class="btn-default" href="{{ post.date }}-{{ post.kebab}}.html">Read More</a><p>
-        {% if 'projectLink' in post %}
-        <p><a class="btn-default" href="{{ post.projectLink }}" target="_">Source Code</a><p>
-        {% endif %}
-        {% if 'liveLink' in post %}
-        <p><a class="btn-default" href="{{ post.liveLink }}" target="_">Try it Out</a><p>
-        {% endif %}
-      </div>
-    </div>
-  </article>
+    <a class="card-link" title="{{ post.title}}" href="{{ post.date }}-{{ post.kebab}}.html">
+      <article class="">
+        <img src="{{ post.image }}" />
+        <div class="text">
+            <h3>{{ post.title }}</h3>
+            <p class="summary">
+              {{ post.summary }}
+            </p>
+        </div>
+      </article>
+    </a>
   {% endfor %}
   </main>
 {% endblock %}
